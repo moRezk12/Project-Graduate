@@ -42,13 +42,13 @@ export class AppComponent implements OnInit {
 
 
   images = [
-    "../../../../assets/images/Home/Logo (1).svg",
-    "../../../../assets/images/Home/Logo (2).svg",
-    "../../../../assets/images/Home/Logo Image.svg",
-    "../../../../assets/images/Home/Logo.svg",
-    "../../../../assets/images/Home/Logo (3).svg",
-    "../../../../assets/images/Home/Logo (4).svg",
-    "../../../../assets/images/Home/Logo (5).svg",
+    "./assets/images/Home/Logo (1).svg",
+    "./assets/images/Home/Logo (2).svg",
+    "./assets/images/Home/Logo Image.svg",
+    "./assets/images/Home/Logo.svg",
+    "./assets/images/Home/Logo (3).svg",
+    "./assets/images/Home/Logo (4).svg",
+    "./assets/images/Home/Logo (5).svg",
 
   ];
 

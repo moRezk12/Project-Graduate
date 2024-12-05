@@ -9,14 +9,14 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class HerohomeComponent {
 
   images = [
-    "../../../../assets/images/Home/hero/vote_1622814.png   ",
-    "../../../../assets/images/Home/hero/ballot-box_7553513.png   ",
-    "../../../../assets/images/Home/hero/vote-yes_7444474.png   ",
-    "../../../../assets/images/Home/hero/voting_8597212.png   ",
-    "../../../../assets/images/Home/hero/bowl_3261225.png   ",
-    "../../../../assets/images/Home/hero/vote_3553531.png   ",
-    "../../../../assets/images/Home/hero/team_10618159.png   ",
-    "../../../../assets/images/Home/hero/undraw_team_spirit_re_yl1v.png   ",
+    "./assets/images/Home/hero/vote_1622814.png   ",
+    "./assets/images/Home/hero/ballot-box_7553513.png   ",
+    "./assets/images/Home/hero/vote-yes_7444474.png   ",
+    "./assets/images/Home/hero/voting_8597212.png   ",
+    "./assets/images/Home/hero/bowl_3261225.png   ",
+    "./assets/images/Home/hero/vote_3553531.png   ",
+    "./assets/images/Home/hero/team_10618159.png   ",
+    "./assets/images/Home/hero/undraw_team_spirit_re_yl1v.png   ",
 
   ];
 
