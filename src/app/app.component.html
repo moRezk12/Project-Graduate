@@ -1,0 +1,17 @@
+<!-- <div class="text-center" >
+  <h2 data-aos="fade-down" class="text-red-700 text-2xl mx-auto " > name </h2> <i class="fa-solid fa-house"></i>
+</div> -->
+
+<router-outlet></router-outlet>
+
+
+<button *ngIf="showScrollButton" id="scrollToTopButton"
+class=" animate-bounce fixed bottom-16 right-12  bg-blue-700 text-white font-bold w-[40px] h-[40px] rounded-full"
+(click)="scrollToTop()">
+<i class="fas fa-arrow-up"></i>
+</button>
+
+
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#2563ea" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+

@@ -1,0 +1,11 @@
+::ng-deep .owl-carousel .owl-item img {
+  width: 38% !important;
+  margin: auto auto;
+}
+:host-context([dir="rtl"]) .slider {
+  direction: rtl;
+}
+
+:host-context([dir="ltr"]) .slider {
+  direction: ltr;
+}
