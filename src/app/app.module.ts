@@ -22,6 +22,12 @@ import { RegisterComponent } from './Components/Auth/register/register.component
 import { MainlayoutComponent } from './layouts/mainlayout/mainlayout.component';
 import { CandidatesPageComponent } from './pages/candidates-page/candidates-page.component';
 import { TypeElectionComponent } from './Components/candidatesPage/type-election/type-election.component';
+import { PresidentialelectionsPageComponent } from './pages/presidentialelections-page/presidentialelections-page.component';
+import { SenateelectionsPageComponent } from './pages/senateelections-page/senateelections-page.component';
+import { PresidentialPageComponent } from './Components/presidential-page/presidential-page.component';
+import { SenatePageComponent } from './Components/senate-page/senate-page.component';
+import { PeoplePageComponent } from './pages/people-page/people-page.component';
+import { PeopleassemblyPageComponent } from './Components/peopleassembly-page/peopleassembly-page.component';
 
 
 @NgModule({
@@ -41,7 +47,13 @@ import { TypeElectionComponent } from './Components/candidatesPage/type-election
     RegisterComponent,
     MainlayoutComponent,
     CandidatesPageComponent,
-    TypeElectionComponent
+    TypeElectionComponent,
+    PresidentialelectionsPageComponent,
+    SenateelectionsPageComponent,
+    PresidentialPageComponent,
+    PeopleassemblyPageComponent,
+    SenatePageComponent,
+    PeoplePageComponent,
   ],
   imports: [
     BrowserModule,
