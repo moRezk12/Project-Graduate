@@ -8,6 +8,7 @@ import { TypeElectionComponent } from './Components/candidatesPage/type-election
 import { PresidentialelectionsPageComponent } from './pages/presidentialelections-page/presidentialelections-page.component';
 import { SenateelectionsPageComponent } from './pages/senateelections-page/senateelections-page.component';
 import { PeoplePageComponent } from './pages/people-page/people-page.component';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
           { path: 'presidential', component : PresidentialelectionsPageComponent  },
           { path: 'senate', component : SenateelectionsPageComponent  },
           // { path: 'peopleAssembly', component : PeopleassemblyPageComponent  },
-          {path : "peopleAssembly" , component : PeoplePageComponent}
+          {path : "peopleAssembly" , component : PeoplePageComponent},
+          {path : "details" , component : DetailsPageComponent}
         ]
   },
 

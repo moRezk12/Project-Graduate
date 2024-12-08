@@ -21,6 +21,8 @@ module.exports = {
         'bgstartnow': 'linear-gradient(90deg, #FFFFFF 0%, #0D6EFD 52%)',
         'bgCandidate': 'linear-gradient(90deg, #017AFF 35.5%, #1A293A 90.5%)',
         'bgTypeElection': 'linear-gradient(180deg, #FFFFFF 0%, #417AD1 100%)',
+        'bgDetails': 'linear-gradient(180deg, rgba(160, 212, 251, 0.7) 0%, rgba(255, 255, 255, 0.7) 100%)',
+
 
       },
     },

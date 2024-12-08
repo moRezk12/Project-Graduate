@@ -28,6 +28,9 @@ import { PresidentialPageComponent } from './Components/presidential-page/presid
 import { SenatePageComponent } from './Components/senate-page/senate-page.component';
 import { PeoplePageComponent } from './pages/people-page/people-page.component';
 import { PeopleassemblyPageComponent } from './Components/peopleassembly-page/peopleassembly-page.component';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
+import { HerodetailsComponent } from './Components/DetailsPage/herodetails/herodetails.component';
+import { AboutdetailsComponent } from './Components/DetailsPage/aboutdetails/aboutdetails.component';
 
 
 @NgModule({
@@ -54,6 +57,9 @@ import { PeopleassemblyPageComponent } from './Components/peopleassembly-page/pe
     PeopleassemblyPageComponent,
     SenatePageComponent,
     PeoplePageComponent,
+    DetailsPageComponent,
+    HerodetailsComponent,
+    AboutdetailsComponent,
   ],
   imports: [
     BrowserModule,
