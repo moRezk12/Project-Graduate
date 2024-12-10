@@ -9,6 +9,7 @@ import { PresidentialelectionsPageComponent } from './pages/presidentialelection
 import { SenateelectionsPageComponent } from './pages/senateelections-page/senateelections-page.component';
 import { PeoplePageComponent } from './pages/people-page/people-page.component';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
+import { ResultPageComponent } from './pages/result-page/result-page.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
           { path: 'senate', component : SenateelectionsPageComponent  },
           // { path: 'peopleAssembly', component : PeopleassemblyPageComponent  },
           {path : "peopleAssembly" , component : PeoplePageComponent},
-          {path : "details" , component : DetailsPageComponent}
+          {path : "details" , component : DetailsPageComponent},
+          {path : "result" , component : ResultPageComponent}
         ]
   },
 

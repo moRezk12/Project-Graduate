@@ -31,6 +31,7 @@ import { PeopleassemblyPageComponent } from './Components/peopleassembly-page/pe
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { HerodetailsComponent } from './Components/DetailsPage/herodetails/herodetails.component';
 import { AboutdetailsComponent } from './Components/DetailsPage/aboutdetails/aboutdetails.component';
+import { ResultPageComponent } from './pages/result-page/result-page.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { AboutdetailsComponent } from './Components/DetailsPage/aboutdetails/abo
     DetailsPageComponent,
     HerodetailsComponent,
     AboutdetailsComponent,
+    ResultPageComponent,
   ],
   imports: [
     BrowserModule,
