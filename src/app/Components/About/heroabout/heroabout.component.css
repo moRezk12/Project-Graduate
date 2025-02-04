@@ -1,0 +1,14 @@
+.bgImage {
+  background-image: url("../../../../assets/images/about/Aboutus.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* ظل الزر */
+.btn {
+  box-shadow: 1px 4px 4px 0px #00000040;
+}
