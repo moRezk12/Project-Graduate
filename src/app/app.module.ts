@@ -44,6 +44,13 @@ import { AdmindashboardComponent } from './layouts/dashboard Admin/admindashboar
 import { NavbaradminComponent } from './layouts/dashboard Admin/navbaradmin/navbaradmin.component';
 import { StatisticsComponent } from './Components/Dashboard Admin/statistics/statistics.component';
 import { CandidatemanagementComponent } from './Components/Dashboard Admin/candidatemanagement/candidatemanagement.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
 
 
 @NgModule({
@@ -90,9 +97,17 @@ import { CandidatemanagementComponent } from './Components/Dashboard Admin/candi
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
     CarouselModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     ToastrModule.forRoot(),
   ],
   providers: [],

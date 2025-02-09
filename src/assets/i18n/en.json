@@ -1,0 +1,131 @@
+{
+  "navbar" : {
+    "home": "Home",
+    "about": "About",
+    "typeElection": "Type Election",
+    "help": "Help",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "footer" : {
+    "slogan1": "Easy elections, your vote matters!",
+    "slogan2": "Make sure you are ready to vote!",
+    "navigation": {
+      "home": "Home",
+      "registration": "Registration",
+      "candidates": "Candidates",
+      "vote": "Vote",
+      "contact_us": "Contact Us"
+    },
+    "footer": {
+      "copyright": "©2025 Elections",
+      "privacy_policy": "Privacy Policy"
+    }
+  },
+  "heroHome" :{
+    "voteTeams": "Vote for the teams. Participate in the elections!",
+    "registerNow": "Register now to be part of shaping your country's future",
+    "startRegistering": "Start registering now"
+  },
+  "why" : {
+    "whyParticipation": "Why participation in elections is important?",
+    "electionsImportance": "Elections are not just a right but a responsibility. Every vote contributes to shaping the future of the nation. Your voice matters - register and participate today."
+  },
+  "stages" : {
+    "title": "Election Stages",
+    "step1": "Start your registration online",
+    "step2": "Participate on voting day",
+    "step3": "Verify the final results"
+  },
+  "startnow" : {
+    "title": "Get Started Now",
+    "button1": "Register Now",
+    "button2": "Learn More About Candidates"
+  },
+  "steps" :  {
+    "title": "How to Vote Step by Step",
+    "description": "Register your account. Verify your identity. Head to the polling station on election day. Cast your vote in the ballot box.",
+    "steps": {
+      "register": "Register",
+      "verify": "Verify",
+      "polling_station": "Polling Station",
+      "vote": "Vote"
+    }
+  },
+  "candidate" :{
+    "title": "Presidential Candidates",
+    "candidate_name": "Ahmed",
+    "button": "View Details"
+  },
+  "about" : {
+    "hero" : {
+      "section_title": "About our electoral programme",
+      "description": "Enable access through easy-to-access information",
+      "button": "See More"
+    },
+    "mainfeatures" :  {
+      "section_title": "Main features of the platform",
+      "feature_1": "View specialty files for all details",
+      "feature_1_desc": "Discover their experiences, selected programs, and achievements",
+      "feature_2": "Get election results in real time",
+      "feature_2_desc": "Follow official statistics directly from reliable sources",
+      "feature_3": "Easily locate polling stations",
+      "feature_3_desc": "Use our solid polling station map"
+    },
+    "ourmission" :  {
+      "section_title": "Our mission",
+      "mission_description": "This central hub is designed for accurate and up-to-date information about magazines, election schedules, and polling stations.",
+      "view_more": "View More"
+    },
+    "review" :  {
+      "title" : "   What voters say",
+      "name" : " Ahmed Samir",
+      "desc" : " This platform has been the essence for a completely different reason where accurate information is specified",
+      "desc2" : "Get election results in real time",
+      "desc3" : " Follow official statistics directly from reliable sources",
+      "desc4" : "Easily locate polling stations",
+      "desc5" : " Use our solid polling station map"
+    },
+    "team" : {
+      "title" : "Our Team"
+    }
+  },
+  "typeelection" : {
+    "title": "Choose your Type Of Election",
+    "name1": "Presidential ُlections",
+    "name2": "Senate elections",
+    "name3": "People's Assembly",
+    "button": "Start Now"
+  },
+  "help" : {
+    "title": "How can we help you?",
+    "form": {
+        "fullName": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Message",
+        "button": "Submit"
+    }
+  },
+  "login" : {
+    "title": "Sign In",
+    "logoAlt": "image",
+    "form": {
+        "nameOrEmail": "Name / Email",
+        "nameOrEmailPlaceholder": "Enter Your Name or Email",
+        "password": "Password",
+        "passwordPlaceholder": "Enter Your Password",
+        "rememberMe": "Remember Me",
+        "forgotPassword": "Forgot Password?",
+        "button": "Sign In"
+    },
+    "signup": {
+        "text": "Don't have an account?",
+        "link": "Sign Up"
+    },
+    "orSignInWith": "Or Sign In with"
+  }
+
+
+
+}

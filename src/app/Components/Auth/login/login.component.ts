@@ -13,4 +13,10 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
   }
 
+  isRtl(): boolean {
+    return document.documentElement.dir === 'rtl';
+  }
+
+
+
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { LanguageService } from 'src/app/Core/services/Languages/language.service';
 
 
 @Component({
@@ -8,6 +9,16 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./team.component.css']
 })
 export class TeamComponent {
+
+    currentLang: string = 'en';
+    constructor( private languageService: LanguageService , private cdr: ChangeDetectorRef) {
+      // اشترك في تغيير اللغة باستخدام LanguageService
+      this.languageService.getLanguage().subscribe(lang => {
+        this.currentLang = lang;
+                // Safely update customOptions and apply changes without causing assertion errors
+                this.updateCarouselOptions(lang);
+      });
+    }
 
   customOptions: OwlOptions = {
       loop: true,
@@ -33,8 +44,19 @@ export class TeamComponent {
           items: 4
         }
       },
-      nav: true
+      nav: true,
+      rtl: false
     }
+
+        // Safely update carousel options
+        private updateCarouselOptions(lang: string): void {
+          this.customOptions = { ...this.customOptions, rtl: lang === 'ar' };
+
+          // Use setTimeout to defer the change detection
+          setTimeout(() => {
+            this.cdr.detectChanges();
+          }, 0);
+        }
 
 
 

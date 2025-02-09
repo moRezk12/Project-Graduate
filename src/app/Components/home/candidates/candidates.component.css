@@ -1,0 +1,7 @@
+:host-context([dir="rtl"]) .slider {
+  direction: rtl;
+}
+
+:host-context([dir="ltr"]) .slider {
+  direction: ltr;
+}

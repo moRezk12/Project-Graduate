@@ -6,48 +6,57 @@
     <div>
       <form action="">
         <div class="w-full" >
-          <label class="block mb-[15px] font-medium text-[20px] " for="">Name / Email</label>
-          <input type="text" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="Enter Your Name or Email" >
+          <label class="block mb-[15px] font-medium text-[20px] " for="">
+            {{'login.form.nameOrEmail' | translate}}
+          </label>
+          <input type="text" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder=" {{'login.form.nameOrEmailPlaceholder' | translate}}" >
         </div>
         <div class="w-full relative " >
-          <label class="block my-[15px] font-medium text-[20px] " for="">Password</label>
+          <label class="block my-[15px] font-medium text-[20px] " for="">
+            {{'login.form.password' | translate}}
+          </label>
           <input
           [type]="showPassword ? 'text' : 'password'"
-          type="password" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="Enter Your Password" >
+          type="password" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="{{'login.form.passwordPlaceholder' | translate}}" >
           <i
           [ngClass]="{
             'fa-solid fa-eye-slash': showPassword,
             'fa-regular fa-eye': !showPassword,
+            'right-[20px]': !isRtl(),
+            'left-[20px]': isRtl()
           }"
+
           (click)="showIcon()"
-          class="cursor-pointer absolute right-[20px] top-[65px]  "></i>
+          class="cursor-pointer absolute  top-[65px]  "></i>
         </div>
         <div class="my-[20px] flex justify-between items-center " >
           <div class="flex gap-[10px] items-center" >
             <input type="checkbox"  >
             <p class="text-[18px] font-medium " >
-              Remmber Me
+              {{'login.form.rememberMe' | translate}}
             </p>
           </div>
           <a class=" text-[18px] font-medium text-secondColor " >
-            Forget Password ?
+            {{'login.form.forgotPassword' | translate}}
           </a>
         </div>
         <div>
           <button class=" w-full my-[20px] text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full " >
-            Sign In
+            {{'login.title' | translate}}
           </button>
         </div>
       </form>
       <div>
         <p class="text-[18px] font-medium  " >
-          Don't have an account ?
-          <a routerLink="/register" class="text-secondColor font-medium" >Sign Up</a>
+            {{'login.signup.text' | translate}}
+          <a routerLink="/register" class="text-secondColor font-medium" >
+            {{'login.signup.link' | translate}}
+          </a>
         </p>
       </div>
       <div class="text-center my-[25px] " >
         <p class=" text-[18px] font-medium relative after:content-[''] after:absolute after:w-[30%] md:after:w-[37%]  after:h-[1px] after:bg-secondColor after:top-[50%] after:right-0 after:ml-[10px] before:content-[''] before:absolute before:w-[30%] md:before:w-[37%]  before:h-[1px] before:bg-secondColor before:top-[50%]   before:left-0  " >
-          Or Sign In with
+          {{'login.orSignInWith' | translate}}
         </p>
       </div>
       <div class="flex justify-center gap-5 mt-5">

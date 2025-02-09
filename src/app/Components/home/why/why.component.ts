@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class WhyComponent {
 
+
+  isRtl(): boolean {
+    return document.documentElement.dir === 'rtl';
+  }
+
+
 }

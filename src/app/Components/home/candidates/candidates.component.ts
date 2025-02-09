@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { LanguageService } from 'src/app/Core/services/Languages/language.service';
 
 @Component({
   selector: 'app-candidates',
@@ -7,6 +8,15 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./candidates.component.css']
 })
 export class CandidatesComponent {
+
+    currentLang: string = 'en';
+    constructor( private languageService: LanguageService , private cdr: ChangeDetectorRef) {
+      // اشترك في تغيير اللغة باستخدام LanguageService
+      this.languageService.getLanguage().subscribe(lang => {
+        this.currentLang = lang;
+        this.updateCarouselOptions(lang);
+      });
+    }
 
   customOptions: OwlOptions = {
     loop: true,
@@ -32,7 +42,18 @@ export class CandidatesComponent {
         items: 4
       }
     },
-    nav: false
+    nav: false,
+    rtl: false
   }
+
+      // Safely update carousel options
+      private updateCarouselOptions(lang: string): void {
+        this.customOptions = { ...this.customOptions, rtl: lang === 'ar' };
+
+        // Use setTimeout to defer the change detection
+        setTimeout(() => {
+          this.cdr.detectChanges();
+        }, 0);
+      }
 
 }

@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
       once: false,
       duration: 1000,
       easing: 'ease-in-out',
-      offset: 200,
+      offset: 0,
       startEvent: 'DOMContentLoaded',
     });
   }

@@ -8,20 +8,26 @@
         <i *ngIf="!menuOpen" (click)="toggleMenu()" class="fa-solid fa-bars text-white text-[30px] cursor-pointer "></i>
         <i *ngIf="menuOpen" (click)="toggleMenu()" class="fa-solid fa-xmark text-white text-[30px] cursor-pointer "></i>
       </div>
-      <div class="flex flex-col lg:flex-row lg:justify-end items-center lg:static py-[15px]  lg:p-0 absolute bg-normalColor top-[75px] w-[60%] md:w-full left-0 transition-transform duration-300"
+      <div class="flex flex-col lg:flex-row lg:justify-center items-center lg:static py-[15px]  lg:p-0 absolute bg-normalColor top-[75px] w-[60%] md:w-full left-0 transition-transform duration-300"
       [ngClass]="{'hidden': !menuOpen, 'block': menuOpen, 'lg:flex': true}" >
         <ul class="flex  flex-col lg:flex-row space-y-8 lg:space-y-0 pt-[20px] lg:pt-0  "  >
           <li routerLink="/home" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
             <i class="fa-solid fa-house mx-[5px] bg-white p-1 rounded-[5px] "></i>
-            <a class=" py-[15px] font-medium text-[20px] "  >Home</a>
+            <a class=" py-[15px] font-medium text-[20px] "  >
+              {{'navbar.home' | translate}}
+            </a>
           </li>
           <li routerLink="/about" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
             <i class="fas fa-info-circle mx-[5px] bg-white p-1 rounded-[5px] "></i>
-            <a class=" py-[15px] font-medium text-[20px] "  >About  </a>
+            <a class=" py-[15px] font-medium text-[20px] "  >
+              {{'navbar.about' | translate}}
+            </a>
           </li>
           <li routerLink="/typeElection" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
             <i class="fa-regular fa-file-lines mx-[5px] bg-white p-1 rounded-[5px] "></i>
-            <a class=" py-[15px] font-medium text-[20px] "  >Type Election  </a>
+            <a class=" py-[15px] font-medium text-[20px] "  >
+              {{'navbar.typeElection' | translate}}
+            </a>
           </li>
           <!-- <li routerLink="" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
             <i class="fa-solid fa-check mx-[5px] bg-white p-1 rounded-[5px] "></i>
@@ -29,12 +35,62 @@
           </li> -->
           <li routerLink="/help" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
             <i class="fa-solid fa-circle-info mx-[5px] bg-white p-1 rounded-[5px] "></i>
-            <a class=" py-[15px] font-medium text-[20px] "  >Help  </a>
+            <a class=" py-[15px] font-medium text-[20px] "  >
+              {{'navbar.help' | translate}}
+            </a>
           </li>
         </ul>
-        <div class="lg:block flex flex-col justify-center space-y-3 lg:space-y-0 py-[20px] lg:py-0 mt-[20px] lg:mt-0 " >
-          <button routerLink="/login" class="   mx-[15px] text-[20px] font-medium  border border-secondColor px-[55px] lg:px-[25px] py-[10px] rounded-full ">Sign In</button>
-          <button routerLink="/register" class="text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full ">Sign Up</button>
+        <div class="flex flex-col justify-center items-center lg:hidden my-[20px] " >
+          <div
+          (click)="changeLanguage(currentLang === 'ar' ? 'en' : 'ar')"
+            class="flex justify-between items-center gap-3 cursor-pointer ">
+            <!-- language -->
+            <button
+            class="text-[20px]  font-medium  "
+            >
+            {{currentLang === 'ar' ? 'EN' : 'AR'}}
+          </button>
+
+          <!-- flag -->
+          <!-- <div class="w-[30px] h-[30px] " >
+            <img *ngIf="flag" src="assets/images/en.svg" alt="English Flag" class="my-auto">
+            <img *ngIf="!flag" src="assets/images/ar.svg" alt="Arabic Flag" class="  my-auto">
+          </div> -->
+          </div>
+          <div class=" flex flex-col justify-center space-y-3 lg:space-y-0 py-[20px] lg:py-0  lg:mt-0 " >
+            <button routerLink="/login" class=" whitespace-nowrap  mx-[15px] text-[20px] font-medium  border border-secondColor px-[55px] lg:px-[25px] py-[10px] rounded-full ">
+              {{'navbar.signIn' | translate}}
+            </button>
+            <button routerLink="/register" class="whitespace-nowrap text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full ">
+              {{'navbar.signUp' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="hidden lg:flex " >
+        <div
+          (click)="changeLanguage(currentLang === 'ar' ? 'en' : 'ar')"
+            class="flex justify-between items-center gap-3 cursor-pointer ">
+            <!-- language -->
+            <button
+            class="text-[20px]  font-medium  "
+            >
+            {{currentLang === 'ar' ? 'EN' : 'AR'}}
+          </button>
+
+          <!-- flag -->
+          <!-- <div class="w-[30px] h-[30px] " >
+            <img *ngIf="flag" src="assets/images/en.svg" alt="English Flag" class="my-auto">
+            <img *ngIf="!flag" src="assets/images/ar.svg" alt="Arabic Flag" class="  my-auto">
+          </div> -->
+          </div>
+        <div class=" flex flex-row justify-center space-y-3 lg:space-y-0 py-[20px] lg:py-0 mt-[20px] lg:mt-0 " >
+          <button routerLink="/login" class=" whitespace-nowrap  mx-[15px] text-[20px] font-medium  border border-secondColor px-[55px] lg:px-[25px] py-[10px] rounded-full ">
+            {{'navbar.signIn' | translate}}
+          </button>
+          <button routerLink="/register" class="whitespace-nowrap text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full ">
+            {{'navbar.signUp' | translate}}
+          </button>
         </div>
       </div>
     </div>
