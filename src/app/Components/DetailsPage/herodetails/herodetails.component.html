@@ -1,17 +1,23 @@
 <section>
   <div class="container">
     <div  class=" flex flex-col-reverse md:flex-row justify-between items-center px-[40px] py-[15px] md:py-0 mt-[60px] rounded-[15px] bg-bgDetails " >
-      <div data-aos="fade-right" data-aos-delay="200" class="w-full md:w-[50%] text-center md:text-left mt-[25px] md:mt-0 " >
-        <button (click)="GoBack()" class="text-[18px] leading-[25px] mb-[25px] md:text-[20px] md:leading-[25px] lg:text-[25px] lg:leading-[32px]  font-medium text-white border border-secondColor bg-secondColor px-[25px] py-[10px] rounded-[20px] " >
-          <i class="fa-solid fa-arrow-left text-black mt-[5px] mx-[5px] "></i> back
-        </button>
-          <h3 class="text-[21px] leading-[25px] md:text-[25px] md:leading-[32px]  lg:text-[40px] lg:leading-[50px] font-medium " >
-            Mohamed Ahmed El Sayed
+      <div data-aos="fade-right" data-aos-delay="200" class="w-full md:w-[50%]  md:text-left mt-[25px] md:mt-0 " >
+        <div class="flex " >
+          <button (click)="GoBack()" class="text-[18px] leading-[25px] mb-[25px] md:text-[20px] md:leading-[25px] lg:text-[25px] lg:leading-[32px]  font-medium text-white border border-secondColor bg-secondColor px-[25px] py-[10px] rounded-[20px] " >
+            <i
+            [ngClass]="{'fa-arrow-left': !isRtl(),'fa-arrow-right': isRtl()}"
+            class="fa-solid  text-black mt-[5px] mx-[5px] "></i>
+            {{'details.back' | translate}}
+          </button>
+
+        </div>
+          <h3 class="text-[21px] leading-[25px] md:text-[25px] md:leading-[32px]  lg:text-[40px] lg:leading-[50px] font-medium text-start" >
+            {{'details.candidate_name' | translate}}
           </h3>
 
           <div class=" flex items-center gap-5 " >
             <h2 class="text-[#000000] text-[23px] leading-[25px] " >
-              Symbol :
+              {{'details.symbol' | translate}}
             </h2>
             <div class="w-[80px] h-[80px] p-[10px] rounded-full flex items-center justify-center bg-white  " >
               <img class="w-full h-full" src="assets/images/presidential/icon-park_book-one.png" loading="lazy" alt="image">
@@ -25,7 +31,7 @@
         <div class="flex items-center  gap-[30px] " >
 
           <button class=" text-[18px] leading-[25px] md:text-[20px] md:leading-[25px] lg:text-[22px] lg:leading-[28px]  font-medium text-white border border-secondColor bg-secondColor px-[15px] py-[10px] rounded-[20px] "  >
-            <i class="fa-regular fa-circle-check"></i> Vote Now
+            <i class="fa-regular fa-circle-check"></i>  {{'details.vote_now' | translate}}
           </button>
         </div>
       </div>

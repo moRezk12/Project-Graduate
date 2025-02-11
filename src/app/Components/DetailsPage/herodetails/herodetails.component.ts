@@ -13,8 +13,13 @@ export class HerodetailsComponent {
 
   GoBack() {
     this.locatinRoute.back()
-  
+
   }
+
+  isRtl(): boolean {
+    return document.documentElement.dir === 'rtl';
+  }
+
 
 
 }

@@ -124,7 +124,31 @@
         "link": "Sign Up"
     },
     "orSignInWith": "Or Sign In with"
+  },
+  "people" : {
+    "title": "People's Assembly election candidates",
+    "presidentialTitle": "Presidential election candidates",
+    "senateTitle": "Senate election candidates",
+    "candidateName": "Mohamed",
+    "code": "Code",
+    "buttons": {
+        "vote": "Vote now",
+        "details": "View Details"
+    }
+  },
+  "details" : {
+    "aboutMe": "About Me",
+    "age": "Age",
+    "dob": "Date of Birth",
+    "nationality": "Nationality",
+    "governorate": "Governorate",
+    "candidateNumber": "Candidate Number",
+    "back": "Back",
+    "candidate_name": "Mohamed Ahmed El Sayed",
+    "symbol": "Symbol:",
+    "vote_now": "Vote Now"
   }
+
 
 
 

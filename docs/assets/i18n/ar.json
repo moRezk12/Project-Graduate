@@ -124,7 +124,31 @@
         "link": "إنشاء حساب"
     },
     "orSignInWith": "أو تسجيل الدخول عبر"
+  },
+  "people" : {
+    "title": "مرشحو انتخابات مجلس الشعب",
+    "presidentialTitle": "مرشحو انتخابات الرئاسة",
+    "senateTitle": "مرشحو انتخابات مجلس الشيوخ",
+    "candidateName": "محمد",
+    "code": "الكود",
+    "buttons": {
+        "vote": "صوت الآن",
+        "details": "عرض التفاصيل"
+    }
+  },
+  "details" : {
+    "aboutMe": "من أنا",
+    "age": "العمر",
+    "dob": "تاريخ الميلاد",
+    "nationality": "الجنسية",
+    "governorate": "المحافظة",
+    "candidateNumber": "رقم المرشح",
+    "back": "رجوع",
+    "candidate_name": "محمد أحمد السيد",
+    "symbol": "الرمز:",
+    "vote_now": "صوّت الآن"
   }
+
 
 
 
