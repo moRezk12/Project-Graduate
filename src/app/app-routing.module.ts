@@ -40,8 +40,8 @@ const routes: Routes = [
   {
     path: '',component : AdmindashboardComponent,
     children: [
-      {path:'',redirectTo:'statistics',pathMatch:'full'},
-      {path:'statistics',component : StatisticsComponent},
+      {path:'',redirectTo:'dashboard',pathMatch:'full'},
+      {path:'dashboard',component : StatisticsComponent},
       {path:'candidatemanagement',component : CandidatemanagementComponent }
     ]
   },
