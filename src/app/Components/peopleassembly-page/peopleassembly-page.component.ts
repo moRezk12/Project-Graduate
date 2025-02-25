@@ -7,4 +7,21 @@ import { Component } from '@angular/core';
 })
 export class PeopleassemblyPageComponent {
 
+  openCamera : boolean = false
+  constructor() {
+    // setInterval(() => {
+    //   this.openCamera = false
+    // }, 10000);
+  }
+
+
+  openPopup() {
+    this.openCamera = true
+  }
+
+  closePopup(event: boolean) {
+    this.openCamera = event
+  }
+
+
 }

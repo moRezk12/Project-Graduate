@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="mt-[20px] flex justify-between gap-4 " >
-          <button class=" w-full text-[20px] bg-[#007AFF] text-white px-[25px] py-[10px] rounded-[10px] " >
+          <button (click)="openPopup()" class=" w-full text-[20px] bg-[#007AFF] text-white px-[25px] py-[10px] rounded-[10px] " >
             {{'people.buttons.vote' | translate}}
           </button>
           <button routerLink="/details" class=" w-full text-[20px] bg-secondColor text-white px-[25px] py-[10px] rounded-[10px] " >
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="mt-[20px] flex justify-between gap-4 " >
-          <button class=" w-full text-[20px] bg-[#007AFF] text-white px-[25px] py-[10px] rounded-[10px] " >
+          <button (click)="openPopup()" class=" w-full text-[20px] bg-[#007AFF] text-white px-[25px] py-[10px] rounded-[10px] " >
             {{'people.buttons.vote' | translate}}
           </button>
           <button routerLink="/details" class=" w-full text-[20px] bg-secondColor text-white px-[25px] py-[10px] rounded-[10px] " >
@@ -74,7 +74,7 @@
           </div>
         </div>
         <div class="mt-[20px] flex justify-between gap-4 " >
-          <button class=" w-full text-[20px] bg-[#007AFF] text-white px-[25px] py-[10px] rounded-[10px] " >
+          <button (click)="openPopup()" class=" w-full text-[20px] bg-[#007AFF] text-white px-[25px] py-[10px] rounded-[10px] " >
             {{'people.buttons.vote' | translate}}
           </button>
           <button routerLink="/details" class=" w-full text-[20px] bg-secondColor text-white px-[25px] py-[10px] rounded-[10px] " >
@@ -86,3 +86,6 @@
 
   </div>
 </section>
+
+
+<app-opencamera *ngIf="openCamera" (close)="closePopup($event)" ></app-opencamera>

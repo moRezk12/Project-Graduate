@@ -1,0 +1,40 @@
+<!-- <div (click)="closeModal()" class="fixed top-0 left-0 right-0 bottom-0 z-[999999999999999999] w-full h-screen bg-black opacity-[0.8] cursor-pointer " >
+  <div class="flex items-center justify-center w-full h-full " >
+    <div (click)="$event.stopPropagation()" class=" w-full md:w-[60%]  bg-black p-[15px] rounded-[15px] " >
+      <div class="  " >
+        <div class="flex flex-col md:flex-row gap-5 justify-between items-center" >
+          <div class="w-full" >
+            <video *ngIf="!capturedImage" #video width="250" height="250" autoplay></video>
+          </div>
+          <div class="w-full text-right" >
+            <img width="300" height="300"  *ngIf="capturedImage" [src]="capturedImage" alt="Captured Image" />
+          </div>
+        </div>
+        <div class="flex justify-center items-center" >
+          <button  (click)="openCamera()" *ngIf="!isCameraOpen" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px] "  > Open Camera </button>
+          <button (click)="capturePhoto()" *ngIf="isCameraOpen" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px] "> Take A Photo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div (click)="closeModal()" class="fixed inset-0 h-full bg-gray-600 bg-opacity-90  z-[999999999999999] cursor-pointer">
+  <div class="fixed inset-0 flex items-center justify-center  rounded-lg p-3">
+    <div (click)="$event.stopPropagation()" class="w-full md:w-[60%] p-6 rounded-[15px] mx-auto bg-[#ffffff] dark:bg-[#33373E] ">
+      <div class="flex flex-col lg:flex-row gap-5 justify-center items-center" >
+        <div class="w-full"  >
+          <video *ngIf="!capturedImage" #video class="w-full" height="250" autoplay></video>
+        </div>
+        <div class="w-full" >
+          <img class="w-full" height="300"  *ngIf="capturedImage" [src]="capturedImage" alt="Captured Image" />
+        </div>
+      </div>
+      <div class="flex justify-center items-center" >
+        <button  (click)="openCamera()" *ngIf="!isCameraOpen" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px] "  > Open Camera </button>
+        <button (click)="capturePhoto()" *ngIf="isCameraOpen" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px] "> Take A Photo</button>
+      </div>
+    </div>
+  </div>
+</div>
