@@ -73,5 +73,8 @@ export class HerohomeComponent {
     return document.documentElement.dir === 'rtl';
   }
 
+  
+
+
 
 }

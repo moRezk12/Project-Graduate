@@ -12,29 +12,29 @@
       [ngClass]="{'hidden': !menuOpen, 'block': menuOpen, 'lg:flex': true}" >
         <ul class="flex  flex-col lg:flex-row space-y-8 lg:space-y-0 pt-[20px] lg:pt-0  "  >
           <li routerLink="/home" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
-            <i class="fa-solid fa-house mx-[5px] bg-white p-1 rounded-[5px] "></i>
+            <!-- <i class="fa-solid fa-house mx-[5px] bg-white p-1 rounded-[5px] "></i> -->
             <a class=" py-[15px] font-medium text-[20px] "  >
               {{'navbar.home' | translate}}
             </a>
           </li>
           <li routerLink="/about" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
-            <i class="fas fa-info-circle mx-[5px] bg-white p-1 rounded-[5px] "></i>
+            <!-- <i class="fas fa-info-circle mx-[5px] bg-white p-1 rounded-[5px] "></i> -->
             <a class=" py-[15px] font-medium text-[20px] "  >
               {{'navbar.about' | translate}}
             </a>
           </li>
           <li routerLink="/typeElection" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
-            <i class="fa-regular fa-file-lines mx-[5px] bg-white p-1 rounded-[5px] "></i>
+            <!-- <i class="fa-regular fa-file-lines mx-[5px] bg-white p-1 rounded-[5px] "></i> -->
             <a class=" py-[15px] font-medium text-[20px] "  >
               {{'navbar.typeElection' | translate}}
             </a>
           </li>
-          <!-- <li routerLink="" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
-            <i class="fa-solid fa-check mx-[5px] bg-white p-1 rounded-[5px] "></i>
-            <a class=" py-[15px] font-medium text-[20px] "  >Vote  </a>
-          </li> -->
+          <li routerLink="/result" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
+            <!-- <i class="fa-solid fa-check mx-[5px] bg-white p-1 rounded-[5px] "></i> -->
+            <a class=" py-[15px] font-medium text-[20px] "  >Result Vote  </a>
+          </li>
           <li routerLink="/help" (click)="scrollTop()" class="px-[10px] cursor-pointer  " >
-            <i class="fa-solid fa-circle-info mx-[5px] bg-white p-1 rounded-[5px] "></i>
+            <!-- <i class="fa-solid fa-circle-info mx-[5px] bg-white p-1 rounded-[5px] "></i> -->
             <a class=" py-[15px] font-medium text-[20px] "  >
               {{'navbar.help' | translate}}
             </a>

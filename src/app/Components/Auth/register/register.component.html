@@ -4,43 +4,67 @@
       <img routerLink="/home" class="w-[100px] h-[60px] cursor-pointer " src="./assets/images/navbar/pngegg (1).png" alt="image ">
     </div>
     <div>
-      <form action="">
-        <div class="flex flex-col md:flex-row gap-2 items-center " >
-          <div class="w-full mb-[15px]" >
-            <label class="block  font-medium text-[20px] " for="">UserName</label>
-            <input type="text" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="Enter Your UserName" >
+      <form [formGroup]="registerForm" action="">
+        <div class="flex flex-col md:flex-row gap-2 items-center">
+          <div class="w-full mb-[15px]">
+            <label class="block font-medium text-[20px]">UserName</label>
+            <input type="text" formControlName="userName" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your UserName">
+            <small *ngIf="registerForm.controls['userName'].invalid && registerForm.controls['userName'].touched" class="text-red-500">
+              * Username is required
+            </small>
           </div>
-          <div class="w-full mb-[15px] " >
-            <label class="block  font-medium text-[20px] " for="">Email</label>
-            <input type="email" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="Enter Your Email" >
-          </div>
-        </div>
-        <div class="flex flex-col md:flex-row gap-2 items-center  " >
-          <div class="w-full mb-[15px] " >
-            <label class="block  font-medium text-[20px] " for="">Date</label>
-            <input type="date" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="Enter Your Date" >
-          </div>
-          <div class="w-full mb-[15px] " >
-            <label class="block  font-medium text-[20px] " for="">age</label>
-            <input type="number" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="Enter Your Age" >
+
+          <div class="w-full mb-[15px]">
+            <label class="block font-medium text-[20px]">Email</label>
+            <input type="email" formControlName="email" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your Email">
+            <small *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched" class="text-red-500">
+              * Enter a valid email
+            </small>
           </div>
         </div>
-        <div class="w-full mb-[15px] " >
-          <label class="block  font-medium text-[20px] " for="">National ID</label>
-          <input type="text" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="Enter Your National ID" >
+
+        <div class="flex flex-col md:flex-row gap-2 items-center">
+          <div class="w-full mb-[15px]">
+            <label class="block font-medium text-[20px]">Date</label>
+            <input type="date" formControlName="date" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]">
+            <small *ngIf="registerForm.controls['date'].invalid && registerForm.controls['date'].touched" class="text-red-500">
+              * Date is required
+            </small>
+          </div>
+
+          <div class="w-full mb-[15px]">
+            <label class="block font-medium text-[20px]">Age</label>
+            <input type="number" formControlName="age" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your Age">
+            <small *ngIf="registerForm.controls['age'].invalid && registerForm.controls['age'].touched" class="text-red-500">
+              * Age must be between 1 and 120
+            </small>
+          </div>
         </div>
-        <div class="w-full my-[15px] relative " >
-          <label class="block  font-medium text-[20px] " for="">Password</label>
-          <input
-          [type]="showPassword ? 'text' : 'password'"
-          type="password" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder="Enter Your Password" >
-          <i
-          [ngClass]="{
-            'fa-solid fa-eye-slash': showPassword,
-            'fa-regular fa-eye': !showPassword,
-          }"
-          (click)="showIcon()"
-          class="cursor-pointer absolute right-[20px] top-[50px]  "></i>
+
+        <div class="w-full mb-[15px]">
+          <label class="block font-medium text-[20px]">National ID</label>
+          <input type="text" formControlName="nationalId" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your National ID">
+          <small *ngIf="registerForm.controls['nationalId'].invalid && registerForm.controls['nationalId'].touched" class="text-red-500">
+            * National ID is required
+          </small>
+        </div>
+
+        <div class="w-full my-[15px] relative">
+          <label class="block font-medium text-[20px]">Password</label>
+          <input type="password" formControlName="password" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your Password">
+          <small *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched" class="text-red-500">
+            * Password must be at least 6 characters
+          </small>
+        </div>
+
+        <div class="my-[20px] flex justify-between items-center">
+          <div class="flex gap-[10px] items-center">
+            <input type="checkbox" formControlName="terms">
+            <p class="text-[18px] font-medium">By signing up, you are agreeing to our Terms & Conditions and <span class="text-secondColor">Privacy Policy</span></p>
+          </div>
+          <small *ngIf="registerForm.controls['terms'].invalid && registerForm.controls['terms'].touched" class="text-red-500">
+            * You must accept the terms
+          </small>
         </div>
       </form>
       <!-- لرفع صوره البطاقه -->
@@ -71,17 +95,17 @@
         <button (click)="capturePhoto()" *ngIf="isCameraOpen" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px] "> Take A Photo</button>
       </div>
 
-      <div class="my-[20px] flex justify-between items-center " >
+      <!-- <div class="my-[20px] flex justify-between items-center " >
         <div class="flex gap-[10px] items-center" >
           <input type="checkbox"  >
           <p class="text-[18px] font-medium " >
             By signing up, you are agreeing to our Terms & Conditions and <span class="text-secondColor" >Privacy Policy</span>
           </p>
         </div>
-      </div>
+      </div> -->
       <!-- Button Sign Up -->
       <div>
-        <button class=" w-full my-[20px] text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full " >
+        <button (click)="registerUser()" class=" w-full my-[20px] text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full " >
           Sign Up
         </button>
       </div>

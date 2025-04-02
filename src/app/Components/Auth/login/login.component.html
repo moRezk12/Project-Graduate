@@ -4,7 +4,7 @@
       <img routerLink="/home" class="w-[100px] h-[60px] cursor-pointer " src="./assets/images/navbar/pngegg (1).png" alt="image ">
     </div>
     <div>
-      <form action="">
+      <!-- <form action="">
         <div class="w-full" >
           <label class="block mb-[15px] font-medium text-[20px] " for="">
             {{'login.form.nameOrEmail' | translate}}
@@ -36,7 +36,7 @@
               {{'login.form.rememberMe' | translate}}
             </p>
           </div>
-          <a class=" text-[18px] font-medium text-secondColor " >
+          <a class="cursor-pointer text-[18px] font-medium text-secondColor " >
             {{'login.form.forgotPassword' | translate}}
           </a>
         </div>
@@ -45,7 +45,76 @@
             {{'login.title' | translate}}
           </button>
         </div>
+      </form> -->
+
+      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+        <!-- حقل البريد الإلكتروني أو الاسم -->
+        <div class="w-full">
+          <label class="block mb-2 font-medium text-lg" for="nameOrEmail">
+            Email or Username
+          </label>
+          <input
+            formControlName="nameOrEmail"
+            type="text"
+            class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]"
+            placeholder="Enter your email or username"
+          />
+          <small *ngIf="loginForm.controls['nameOrEmail'].invalid && (loginForm.controls['nameOrEmail'].dirty || loginForm.controls['nameOrEmail'].touched)" class="text-red-500">
+            * This field is required and must be a valid email.
+          </small>
+        </div>
+
+        <!-- حقل كلمة المرور -->
+        <div class="w-full relative mt-4">
+          <label class="block mb-2 font-medium text-lg" for="password">
+            Password
+          </label>
+          <input
+            formControlName="password"
+            [type]="showPassword ? 'text' : 'password'"
+            class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]"
+            placeholder="Enter your password"
+          />
+          <i
+          [ngClass]="{
+            'fa-solid fa-eye-slash': !showPassword,
+            'fa-regular fa-eye': showPassword,
+            'right-[20px]': !isRtl(),
+            'left-[20px]': isRtl()
+          }"
+
+          (click)="showIcon()"
+          class="cursor-pointer absolute  top-[50%] translate-y-[50%]  "></i>
+          <small *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="text-red-500">
+            * Password is required and must be at least 6 characters long.
+          </small>
+        </div>
+
+        <!-- خيار تذكرني ونسيت كلمة المرور -->
+        <div class="my-4 flex justify-between items-center">
+          <div class="flex gap-2 items-center">
+            <input formControlName="rememberMe" type="checkbox" />
+            <p class="text-lg font-medium">Remember me</p>
+          </div>
+          <a class="cursor-pointer text-lg font-medium text-blue-600">
+            Forgot password?
+          </a>
+        </div>
+
+        <!-- زر تسجيل الدخول -->
+        <div>
+          <button
+            type="submit"
+            class="w-full my-4 text-lg font-medium bg-blue-600 border border-blue-600 text-white px-6 py-3 rounded-full disabled:cursor-not-allowed disabled:opacity-50"
+            [disabled]="loginForm.invalid"
+          >
+            Login
+          </button>
+        </div>
       </form>
+
+
+
       <div>
         <p class="text-[18px] font-medium  " >
             {{'login.signup.text' | translate}}
