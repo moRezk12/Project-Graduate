@@ -8,8 +8,8 @@
         <div class="flex flex-col md:flex-row gap-2 items-center">
           <div class="w-full mb-[15px]">
             <label class="block font-medium text-[20px]">UserName</label>
-            <input type="text" formControlName="userName" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your UserName">
-            <small *ngIf="registerForm.controls['userName'].invalid && registerForm.controls['userName'].touched" class="text-red-500">
+            <input type="text" formControlName="name" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your name">
+            <small *ngIf="registerForm.controls['name'].invalid && registerForm.controls['name'].touched" class="text-red-500">
               * Username is required
             </small>
           </div>
@@ -26,19 +26,19 @@
         <div class="flex flex-col md:flex-row gap-2 items-center">
           <div class="w-full mb-[15px]">
             <label class="block font-medium text-[20px]">Date</label>
-            <input type="date" formControlName="date" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]">
-            <small *ngIf="registerForm.controls['date'].invalid && registerForm.controls['date'].touched" class="text-red-500">
+            <input type="date" formControlName="dateOfBirth" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]">
+            <small *ngIf="registerForm.controls['dateOfBirth'].invalid && registerForm.controls['dateOfBirth'].touched" class="text-red-500">
               * Date is required
             </small>
           </div>
 
-          <div class="w-full mb-[15px]">
+          <!-- <div class="w-full mb-[15px]">
             <label class="block font-medium text-[20px]">Age</label>
             <input type="number" formControlName="age" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your Age">
             <small *ngIf="registerForm.controls['age'].invalid && registerForm.controls['age'].touched" class="text-red-500">
               * Age must be between 1 and 120
             </small>
-          </div>
+          </div> -->
         </div>
 
         <div class="w-full mb-[15px]">
@@ -49,22 +49,39 @@
           </small>
         </div>
 
-        <div class="w-full my-[15px] relative">
-          <label class="block font-medium text-[20px]">Password</label>
-          <input type="password" formControlName="password" class="w-full text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]" placeholder="Enter Your Password">
-          <small *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched" class="text-red-500">
-            * Password must be at least 6 characters
+      <div class="w-full relative mt-4">
+          <label class="block mb-2 font-medium text-lg" for="password">
+            Password
+          </label>
+          <input
+            formControlName="password"
+            [type]="showPassword ? 'text' : 'password'"
+            class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]"
+            placeholder="Enter your password"
+          />
+          <i
+          [ngClass]="{
+            'fa-solid fa-eye-slash': !showPassword,
+            'fa-regular fa-eye': showPassword,
+            'right-[20px]': !isRtl(),
+            'left-[20px]': isRtl()
+          }"
+
+          (click)="showIcon()"
+          class="cursor-pointer absolute  top-[50%] translate-y-[50%]  "></i>
+          <small *ngIf="registerForm.controls['password'].invalid || (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)" class="text-red-500">
+            * Password is required and must be at least 6 characters long.
           </small>
         </div>
 
         <div class="my-[20px] flex justify-between items-center">
           <div class="flex gap-[10px] items-center">
-            <input type="checkbox" formControlName="terms">
+            <input type="checkbox" >
             <p class="text-[18px] font-medium">By signing up, you are agreeing to our Terms & Conditions and <span class="text-secondColor">Privacy Policy</span></p>
           </div>
-          <small *ngIf="registerForm.controls['terms'].invalid && registerForm.controls['terms'].touched" class="text-red-500">
+          <!-- <small *ngIf="registerForm.controls['terms'].invalid && registerForm.controls['terms'].touched" class="text-red-500">
             * You must accept the terms
-          </small>
+          </small> -->
         </div>
       </form>
       <!-- لرفع صوره البطاقه -->
@@ -75,9 +92,9 @@
           <input type="file" id="uploadFile" class="hidden" accept="image/*" (change)="previewImage($event)" />
 
           <!-- عرض الصورة المرفوعة -->
-          <div *ngIf="imagePreview" class="mt-4 w-[150px] ">
+          <div *ngIf="showimage" class="mt-4 w-[150px] ">
             <!-- <h3>الصورة المرفوعة:</h3> -->
-            <img class="w-[150px] h-[150px] "  [src]="imagePreview" alt="image" class="w-full" />
+            <img class="w-[150px] h-[150px] "  [src]="showimage" alt="image" class="w-full" />
           </div>
         </label>
       </div>
@@ -85,10 +102,10 @@
       <div class="w-full mt-[20px] " >
         <div class="flex flex-col md:flex-row gap-5 justify-between items-center" >
           <div class="w-full" >
-            <video *ngIf="!capturedImage" #video width="250" height="250" autoplay></video>
+            <video *ngIf="!imageCamera" #video width="250" height="250" autoplay></video>
           </div>
           <div class="w-full text-right" >
-            <img width="300" height="300"  *ngIf="capturedImage" [src]="capturedImage" alt="Captured Image" />
+            <img width="300" height="300"  *ngIf="imageCamera" [src]="imageCamera" alt="Captured Image" />
           </div>
         </div>
         <button  (click)="openCamera()" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px] "  > Open Camera </button>
@@ -105,11 +122,27 @@
       </div> -->
       <!-- Button Sign Up -->
       <div>
-        <button (click)="registerUser()" class=" w-full my-[20px] text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full " >
+        <button (click)="registerUser()"
+
+
+        class=" w-full my-[20px] text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full " >
           Sign Up
         </button>
       </div>
 
+       <!-- [disabled]="
+          !registerForm.valid ||
+          registerForm.get('selfiePhoto')?.value === '' ||
+          registerForm.get('nationalIdPhoto')?.value === ''
+        "
+
+                [disabled]="
+          !registerForm.valid ||
+          registerForm.get('selfiePhoto')?.value === '' ||
+          registerForm.get('nationalIdPhoto')?.value === ''
+        "
+
+        -->
       <div>
         <p class="text-[18px] font-medium  " >
           Already have an Account?

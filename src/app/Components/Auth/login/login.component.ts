@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors }
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Core/services/Auth/auth.service';
 import { LanguageService } from 'src/app/Core/services/Languages/language.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -25,9 +27,8 @@ export class LoginComponent {
     });
 
     this.loginForm = this.formBuilder.group({
-      nameOrEmail: ['', [Validators.required, this.emailOrUsernameValidator]], // التحقق من البريد الإلكتروني
+      email: ['', [Validators.required, this.emailOrUsernameValidator]], // التحقق من البريد الإلكتروني
       password: ['', [Validators.required, Validators.minLength(6)]], // يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل
-      rememberMe: [false]
     });
 
   }
@@ -50,17 +51,33 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       console.log('Form Submitted:', this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe({
-        next: (response) => {
+        next: (response : any ) => {
+
+          localStorage.setItem('token', response.token);
+
           console.log('Login successful', response);
-          // this.router.navigate(['/home']);
+          Swal.fire({
+            title: 'تم!',
+            text: "Successfully login",
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            this.router.navigate(['/home']);
+          });
         },
         error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            confirmButtonText: 'Ok'
+          })
           console.error('Login failed', error);
         }
       })
     } else {
       console.log('Form is invalid');
-      this.loginForm.markAllAsTouched(); 
+      this.loginForm.markAllAsTouched();
     }
   }
 

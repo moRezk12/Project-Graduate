@@ -1,4 +1,5 @@
 import { Component, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/Core/services/Languages/language.service';
 
@@ -11,10 +12,15 @@ export class NavbarComponent {
 
   menuOpen = false;
   currentLang: string = 'en';
+  token : string = ''
 
   constructor(private translate: TranslateService,
     private renderer: Renderer2,
+    private _router: Router,
     private languageService: LanguageService) {
+
+    this.token = localStorage.getItem('token') || '';
+
     this.languageService.getLanguage().subscribe((lang) => {
       this.currentLang = lang;
       this.setLangAttribute(lang);
@@ -48,6 +54,12 @@ export class NavbarComponent {
   scrollTop(){
     this.hide();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    this._router.navigate(['/login']);
+    this.token = '';
   }
 
 }

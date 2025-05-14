@@ -85,12 +85,17 @@
           </div> -->
           </div>
         <div class=" flex flex-row justify-center space-y-3 lg:space-y-0 py-[20px] lg:py-0 mt-[20px] lg:mt-0 " >
-          <button routerLink="/login" class=" whitespace-nowrap  mx-[15px] text-[20px] font-medium  border border-secondColor px-[55px] lg:px-[25px] py-[10px] rounded-full ">
+          <button *ngIf="token === '' " routerLink="/login" class=" whitespace-nowrap  mx-[15px] text-[20px] font-medium  border border-secondColor px-[55px] lg:px-[25px] py-[10px] rounded-full ">
             {{'navbar.signIn' | translate}}
           </button>
-          <button routerLink="/register" class="whitespace-nowrap text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full ">
+          <button *ngIf="token === '' " routerLink="/register" class="whitespace-nowrap text-[20px] font-medium bg-secondColor border border-secondColor text-white  lg:px-[25px] py-[10px] rounded-full ">
             {{'navbar.signUp' | translate}}
           </button>
+
+          <button *ngIf="token !== '' " (click)="logout()" class="mx-3 whitespace-nowrap text-[20px] font-medium bg-red-500 border-none text-white  lg:px-[25px] py-[10px] rounded-full ">
+            logOut
+          </button>
+
         </div>
       </div>
     </div>

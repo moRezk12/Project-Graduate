@@ -7,7 +7,7 @@
       <!-- <form action="">
         <div class="w-full" >
           <label class="block mb-[15px] font-medium text-[20px] " for="">
-            {{'login.form.nameOrEmail' | translate}}
+            {{'login.form.email' | translate}}
           </label>
           <input type="text" class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]  " placeholder=" {{'login.form.nameOrEmailPlaceholder' | translate}}" >
         </div>
@@ -54,12 +54,12 @@
             Email or Username
           </label>
           <input
-            formControlName="nameOrEmail"
+            formControlName="email"
             type="text"
             class="w-[100%] text-[18px] font-medium border border-black rounded-[10px] bg-white p-[12px]"
             placeholder="Enter your email or username"
           />
-          <small *ngIf="loginForm.controls['nameOrEmail'].invalid && (loginForm.controls['nameOrEmail'].dirty || loginForm.controls['nameOrEmail'].touched)" class="text-red-500">
+          <small *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="text-red-500">
             * This field is required and must be a valid email.
           </small>
         </div>
@@ -93,7 +93,7 @@
         <!-- خيار تذكرني ونسيت كلمة المرور -->
         <div class="my-4 flex justify-between items-center">
           <div class="flex gap-2 items-center">
-            <input formControlName="rememberMe" type="checkbox" />
+            <input  type="checkbox" />
             <p class="text-lg font-medium">Remember me</p>
           </div>
           <a class="cursor-pointer text-lg font-medium text-blue-600">
