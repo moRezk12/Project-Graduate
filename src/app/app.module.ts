@@ -44,12 +44,15 @@ import { NavbaradminComponent } from './layouts/dashboard Admin/navbaradmin/navb
 import { StatisticsComponent } from './Components/Dashboard Admin/statistics/statistics.component';
 import { CandidatemanagementComponent } from './Components/Dashboard Admin/candidatemanagement/candidatemanagement.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { OpencameraComponent } from './Components/opencamera/opencamera.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { LoadingInterceptor } from './Core/interceptor/loading.interceptor';
+
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -116,10 +119,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     ToastrModule.forRoot(),
-    
+
 
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

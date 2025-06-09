@@ -52,6 +52,7 @@ export class LoginComponent {
       console.log('Form Submitted:', this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe({
         next: (response : any ) => {
+          console.log(response);
 
           localStorage.setItem('token', response.token);
 
@@ -61,7 +62,7 @@ export class LoginComponent {
             text: "Successfully login",
             icon: 'success',
             confirmButtonText: 'Ok'
-          }).then((result) => {
+          }).then(() => {
             this.router.navigate(['/home']);
           });
         },
