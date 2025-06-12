@@ -58,7 +58,7 @@ export class LoginComponent {
 
           console.log('Login successful', response);
           Swal.fire({
-            title: 'تم!',
+            title: 'Done',
             text: "Successfully login",
             icon: 'success',
             confirmButtonText: 'Ok'
@@ -70,7 +70,7 @@ export class LoginComponent {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!',
+            text: 'Server Error',
             confirmButtonText: 'Ok'
           })
           console.error('Login failed', error);
