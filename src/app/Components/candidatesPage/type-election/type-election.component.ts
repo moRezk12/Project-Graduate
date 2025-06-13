@@ -10,12 +10,28 @@ export class TypeElectionComponent implements OnInit {
 
   constructor(private election : ElectionService){}
 
+  data : [] = [];
+  name : any;
+
+
   ngOnInit(): void {
+
+    this.getAllElections();
+
+  }
+
+  getAllElections(){
     this.election.getElections().subscribe({
-      next : (res) => {
-        console.log(res);
-      },
-      error : (err) => {
+    next : (res) => {
+      console.log(res);
+      this.data = res.$values;
+      console.log(this.data);
+      this.data.forEach((election  : any) => {
+        console.log(election.name);
+        this.name = election.name;
+      });
+    },
+    error : (err) => {
         console.log(err);
       }
     })

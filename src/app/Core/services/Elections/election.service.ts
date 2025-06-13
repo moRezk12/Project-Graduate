@@ -12,12 +12,13 @@ export class ElectionService {
 
   // Get all Elections
   getElections():Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/api/Elections`);
+    // , { headers: { Authorization: `Bearer ${token}` } }
+  return this.http.get<any>(`${environment.apiUrl}/api/Elections`);
   }
 
   // Get Election by id
   getElectionById(id: number):Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/api/Elections/:${id}`);
+    return this.http.get<any>(`${environment.apiUrl}/api/Elections/${id}`);
   }
 
   // Create Election
@@ -27,12 +28,12 @@ export class ElectionService {
 
   // Update Election by id
   updateElection(id: number, data: any):Observable<any> {
-    return this.http.put<any>(`${environment.apiUrl}/api/Elections/:${id}`, data);
+    return this.http.put<any>(`${environment.apiUrl}/api/Elections/${id}`, data);
   }
 
   // Delete Election by id
   deleteElection(id: number):Observable<any> {
-    return this.http.delete<any>(`${environment.apiUrl}/api/Elections/:${id}`);
+    return this.http.delete<any>(`${environment.apiUrl}/api/Elections/${id}`);
   }
 
 

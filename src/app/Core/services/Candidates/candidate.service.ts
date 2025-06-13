@@ -17,22 +17,22 @@ export class CandidateService {
 
   // Get candidate by id
   getCandidateById(id: number):Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/api/Candidates/:${id}`);
+    return this.http.get<any>(`${environment.apiUrl}/api/Candidates/${id}`);
   }
 
   // Create Candidate
-  createCandidate(data: any):Observable<any> {
+  createCandidate(data : any):Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/api/Candidates`, data);
   }
 
   // Update Candidate by id
   updateCandidate(id: number, data: any):Observable<any> {
-    return this.http.put<any>(`${environment.apiUrl}/api/Candidates/:${id}`, data);
+    return this.http.put<any>(`${environment.apiUrl}/api/Candidates/${id}`, data);
   }
 
   // Delete Candidate by id
   deleteCandidate(id: number):Observable<any> {
-    return this.http.delete<any>(`${environment.apiUrl}/api/Candidates/:${id}`);
+    return this.http.delete<any>(`${environment.apiUrl}/api/Candidates/${id}`);
   }
 
 }

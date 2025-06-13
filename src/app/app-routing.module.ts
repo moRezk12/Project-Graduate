@@ -15,6 +15,10 @@ import { HelppageComponent } from './pages/helppage/helppage.component';
 import { AdmindashboardComponent } from './layouts/dashboard Admin/admindashboard/admindashboard.component';
 import { StatisticsComponent } from './Components/Dashboard Admin/statistics/statistics.component';
 import { CandidatemanagementComponent } from './Components/Dashboard Admin/candidatemanagement/candidatemanagement.component';
+import { CandidatesComponent } from './Components/home/candidates/candidates.component';
+import { ElectionsComponent } from './Components/Dashboard Admin/elections/elections.component';
+import { CandidateTypeComponent } from './Components/Dashboard Admin/candidate-type/candidate-type.component';
+import { SupportComponent } from './Components/Dashboard Admin/support/support.component';
 
 
 const routes: Routes = [
@@ -30,7 +34,7 @@ const routes: Routes = [
           { path: 'senate', component : SenateelectionsPageComponent  },
           // { path: 'peopleAssembly', component : PeopleassemblyPageComponent  },
           {path : "peopleAssembly" , component : PeoplePageComponent},
-          {path : "details" , component : DetailsPageComponent},
+          {path : "details/:id" , component : DetailsPageComponent},
           {path : "result" , component : ResultPageComponent},
           {path : "about" , component : AboutPageComponent},
           {path : "help" , component : HelppageComponent}
@@ -42,7 +46,10 @@ const routes: Routes = [
     children: [
       {path:'',redirectTo:'dashboard',pathMatch:'full'},
       {path:'dashboard',component : StatisticsComponent},
-      {path:'candidatemanagement',component : CandidatemanagementComponent }
+      {path:'candidatemanagement',component : CandidatemanagementComponent },
+      {path:'candidatetype',component : CandidateTypeComponent },
+      {path:'elections',component : ElectionsComponent },
+      {path:'support',component : SupportComponent }
     ]
   },
 

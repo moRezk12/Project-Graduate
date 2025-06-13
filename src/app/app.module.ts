@@ -51,6 +51,10 @@ import { OpencameraComponent } from './Components/opencamera/opencamera.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LoadingInterceptor } from './Core/interceptor/loading.interceptor';
+import { AuthInterceptor } from './Core/interceptor/header-Interceptor/auth.interceptor';
+import { ElectionsComponent } from './Components/Dashboard Admin/elections/elections.component';
+import { CandidateTypeComponent } from './Components/Dashboard Admin/candidate-type/candidate-type.component';
+import { SupportComponent } from './Components/Dashboard Admin/support/support.component';
 
 
 
@@ -100,6 +104,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatisticsComponent,
     CandidatemanagementComponent,
     OpencameraComponent,
+    ElectionsComponent,
+    CandidateTypeComponent,
+    SupportComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +131,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
