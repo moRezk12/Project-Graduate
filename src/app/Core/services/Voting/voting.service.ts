@@ -21,8 +21,8 @@ export class VotingService {
   }
 
   // Create Voter
-  createVoter(data: any):Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/api/Voting`, data );
+  createVoter(data: any):Observable<string> {
+    return this.http.post(`${environment.apiUrl}/api/Voting`, data ,  { responseType: 'text' } );
   }
 
 }

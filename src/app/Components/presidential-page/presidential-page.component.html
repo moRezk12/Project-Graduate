@@ -30,7 +30,7 @@
           </div> -->
         </div>
         <div class="mt-[20px] flex justify-between gap-4 " >
-          <button (click)="openPopup()" class=" w-full text-[20px] bg-[#007AFF] text-white px-[25px] py-[10px] rounded-[10px] " >
+          <button (click)="openPopup(item.id)" class=" w-full text-[20px] bg-[#007AFF] text-white px-[25px] py-[10px] rounded-[10px] " >
             {{'people.buttons.vote' | translate}}
           </button>
           <button routerLink="/details/{{item.id}}" class=" w-full text-[20px] bg-secondColor text-white px-[25px] py-[10px] rounded-[10px] " >
@@ -116,4 +116,51 @@
 </section>
 
 
-<app-opencamera *ngIf="openCamera" (close)="closePopup($event)" ></app-opencamera>
+<!-- <app-opencamera *ngIf="openCamera" (close)="closePopup($event)" ></app-opencamera> -->
+
+
+
+<!-- Overlay Background -->
+<div *ngIf="openModalCamera" class="fixed inset-0 h-full bg-gray-600 bg-opacity-90 z-[999] cursor-pointer">
+
+  <!-- خارج النافذة: يقفل النافذة -->
+  <div (click)="closePopup()" class="w-full h-full">
+
+    <!-- داخل النافذة: يمنع غلق البوب أب -->
+    <div (click)="$event.stopPropagation()" class="fixed inset-0 flex items-center justify-center p-3">
+
+      <!-- محتوى البوب أب -->
+      <div class="relative w-full md:w-[60%] p-6 rounded-[15px] mx-auto bg-[#ffffff] dark:bg-[#33373E]">
+
+        <!-- زر إغلاق علوي -->
+        <button (click)="closePopup()" class="absolute top-[-5px] right-[-5px]  text-white bg-red-600 rounded-full py-[3px] px-[10px]  text-[20px] font-bold">&times;</button>
+
+        <!-- الفيديو والصورة -->
+        <div class="flex flex-col lg:flex-row gap-5 justify-center items-center">
+          <div class="w-full">
+            <video *ngIf="!capturedImage" #video class="w-full rounded-[15px] " height="250" autoplay></video>
+          </div>
+          <div class="w-full">
+            <img class="w-full rounded-[15px]  " height="300" *ngIf="capturedImage" [src]="capturedImage" alt="Captured Image" />
+          </div>
+        </div>
+
+        <!-- الأزرار -->
+        <div class="flex justify-center items-center mt-4">
+          <button *ngIf="!btnOpenCamera" (click)="openCamera()" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px]">
+            Open Camera
+          </button>
+          <button *ngIf="isCameraOpen" (click)="capturePhoto()" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px]">
+            Take A Photo
+          </button>
+          <button *ngIf="voteNow" (click)="vote()" class="bg-normalColor text-white p-[10px] rounded-[10px] font-medium text-[18px] m-[15px]">
+            Vote Now
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+

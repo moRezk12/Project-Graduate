@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CandidateService } from 'src/app/Core/services/Candidates/candidate.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -36,14 +37,14 @@ export class CandidateTypeComponent implements OnInit {
       city : ['', [Validators.required]]
     });
 
-    // Check if the value is a phone number
-    this.adminForm.get('mobileNumber')?.valueChanges.subscribe(value => {
-    if (this.isPhoneNumber(value)) {
-      if (!value.startsWith('+966')) {
-        this.adminForm.patchValue({ mobileNumber: `+966${value}` }, { emitEvent: false });
+      // Check if the value is a phone number
+      this.adminForm.get('mobileNumber')?.valueChanges.subscribe(value => {
+      if (this.isPhoneNumber(value)) {
+        if (!value.startsWith('+966')) {
+          this.adminForm.patchValue({ mobileNumber: `+966${value}` }, { emitEvent: false });
+        }
       }
-    }
-  });
+    });
 
     // Get All Admins
     this.getAllAdmins();
@@ -57,22 +58,23 @@ export class CandidateTypeComponent implements OnInit {
 
   // Get All Admins
   getAllAdmins() : void {
-    // this.candidate.getCandidates().subscribe({
-    //   next : (res) => {
+    this.candidate.getCandidates().subscribe({
+      next : (res) => {
+        console.log(res);
 
-    //     this.admins = res.data.admins;
-    //   },
-    //   error : (err) => {
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'Error!',
-    //       text: err.error?.message,
-    //       confirmButtonColor: '#d33',
-    //       timer: 2000,
-    //       timerProgressBar: true,
-    //     });
-    //   }
-    // })
+        // this.admins = res.data.admins;
+      },
+      error : (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: err.error?.message,
+          confirmButtonColor: '#d33',
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
+    })
   }
 
   // Show password

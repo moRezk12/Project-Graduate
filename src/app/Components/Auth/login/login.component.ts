@@ -56,17 +56,38 @@ export class LoginComponent {
 
           localStorage.setItem('token', response.token);
 
+
+          // role:"Admin"
+
           console.log('Login successful', response);
-          Swal.fire({
-            title: 'Done',
-            text: "Successfully login",
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          }).then(() => {
-            this.router.navigate(['/home']);
-          });
+
+          console.log( "fsfsdfsdffsdf" + response.role);
+
+            if (response.role === 'Admin') {
+              Swal.fire({
+                title: 'Done',
+                text: "Successfully login",
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              }).then(() => {
+                this.router.navigate(['/dashboard']);
+              });
+            }
+            else {
+              Swal.fire({
+                title: 'Done',
+                text: "Successfully login",
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              }).then(() => {
+                this.router.navigate(['/home']);
+              });
+            }
+
         },
         error: (error) => {
+          console.log("error"  + error);
+
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
