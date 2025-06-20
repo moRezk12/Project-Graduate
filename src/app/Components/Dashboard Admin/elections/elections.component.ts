@@ -28,13 +28,23 @@ export class ElectionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.minLength(3)]],
-      mobileNumber: ['', [Validators.required, Validators.pattern(/^(\+966)?\d{9}$/)]],
-      password: ['', this.mode ? [] : [Validators.required]],
-      city : ['', [Validators.required]]
+      id: [0, [Validators.required]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      startDate: ['', [Validators.required, Validators.minLength(3)]],
+      endDate: ['', [Validators.required, Validators.pattern(/^(\+966)?\d{9}$/)]],
+      electionType: [2, [Validators.required]]
     });
+
+    /*
+    {
+  "id": 0,
+  "name": "string",
+  "startDate": "2025-06-20T18:30:52.458Z",
+  "endDate": "2025-06-20T18:30:52.458Z",
+  "electionType": 0
+}
+
+    */
 
     // Check if the value is a phone number
     this.adminForm.get('mobileNumber')?.valueChanges.subscribe(value => {
@@ -97,65 +107,78 @@ export class ElectionsComponent implements OnInit {
     //   return
     // }
 
-    // const adminData = this.adminForm.value;
-    // if(!this.mode) {
-    //   this.election.createElections(adminData).subscribe({
-    //     next : (res) => {
+const adminData = this.adminForm.value;
+    if(this.adminForm.get('electionType')?.value === '' || this.adminForm.get('electionType')?.value === null) {
+      adminData.electionType = 2;
+    }
 
-    //       Swal.fire({
-    //         icon: 'success',
-    //         title: 'Success',
-    //         text: res.message.message,
-    //         confirmButtonColor: '#28a745',
-    //         confirmButtonText: 'OK',
-    //         timer: 2000,
-    //         timerProgressBar: true,
-    //       }).then(() => {
-    //         this.getAllAdmins();
-    //         this.showPassword = false ;
-    //         this.mode = false ;
-    //       });
-    //     },
-    //     error : (err) => {
-    //       Swal.fire({
-    //         icon: 'error',
-    //         title: err.error?.message,
-    //         confirmButtonColor: '#d33',
-    //         confirmButtonText: 'Close',
-    //         timer: 2000,
-    //         timerProgressBar: true,
-    //       });
-    //     }
-    //   })
-    // }else {
-    //   this.election.updateelection(this.selectId , adminData).subscribe({
-    //     next : (res) => {
-    //       Swal.fire({
-    //         icon: 'success',
-    //         title: 'Success',
-    //         text: res.message,
-    //         confirmButtonColor: '#28a745',
-    //         confirmButtonText: 'OK',
-    //         timer: 2000,
-    //         timerProgressBar: true,
-    //       }).then(() => {
-    //         this.getAllAdmins();
-    //         this.showPassword = false ;
-    //         this.mode = false ;
-    //       });
-    //     },
-    //     error : (err) => {
-    //       Swal.fire({
-    //         icon: 'error',
-    //         title: err.error?.message,
-    //         confirmButtonColor: '#d33',
-    //         confirmButtonText: 'Close',
-    //         timer: 2000,
-    //         timerProgressBar: true,
-    //       });
-    //     }
-    //   })
-    // }
+    if (this.adminForm.get('id')?.value === '' || this.adminForm.get('id')?.value === null) {
+      adminData.id = 0;
+    }
+    console.log("admin data : "+ JSON.stringify(this.adminForm.value));
+
+    // const adminData = this.adminForm.value;
+    if(!this.mode) {
+      this.election.createElection(adminData).subscribe({
+        next : (res) => {
+          console.log(res);
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: "Election Added Successfully",
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+          }).then(() => {
+            this.getAllAdmins();
+            this.showModal = false ;
+            this.mode = false ;
+          });
+        },
+        error : (err) => {
+          console.log(err);
+
+          Swal.fire({
+            icon: 'error',
+            title: "Error!",
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Close',
+            timer: 2000,
+            timerProgressBar: true,
+          });
+        }
+      })
+    }else {
+      this.election.updateElection(this.selectId , adminData).subscribe({
+        next : (res) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: res.message,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+          }).then(() => {
+            this.getAllAdmins();
+            this.showModal = false ;
+            this.mode = false ;
+          });
+        },
+        error : (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: err.error?.message,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Close',
+            timer: 2000,
+            timerProgressBar: true,
+          });
+        }
+      })
+    }
 
   }
 
@@ -180,7 +203,7 @@ export class ElectionsComponent implements OnInit {
     //   city : category.city
     // });
     // this.selectId = category.id;
-    // // Remove password validator
+    // Remove password validator
     // this.adminForm.get('password')?.clearValidators();
     // this.adminForm.get('password')?.updateValueAndValidity();
     // this.showModal = true;
@@ -212,43 +235,44 @@ export class ElectionsComponent implements OnInit {
 
   // Delete an admin
   deleteAdmin(id: number) {
-    // Swal.fire({
-    //   title: 'Are you sure want to delete ?',
-    //   text: "",
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#d33',
-    //   cancelButtonColor: '#3085d6',
-    //   confirmButtonText: 'Yes, delete it!',
-    //   cancelButtonText: 'Cancel'
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     this.election.deleteelection(id).subscribe({
-    //       next: (res) => {
-    //         Swal.fire({
-    //           icon: 'success',
-    //           title: 'Deleted!',
-    //           text: res.message,
-    //           confirmButtonColor: '#28a745',
-    //           timer: 2000,
-    //           timerProgressBar: true,
-    //         }).then(() => {
-    //           this.getAllAdmins(); // تحديث القائمة بعد الحذف
-    //         });
-    //       },
-    //       error: (err) => {
-    //         Swal.fire({
-    //           icon: 'error',
-    //           title: 'Error!',
-    //           text: err.error?.message,
-    //           confirmButtonColor: '#d33',
-    //           timer: 2000,
-    //           timerProgressBar: true,
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
+    Swal.fire({
+      title: 'Are you sure want to delete ?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.election.deleteElection(id).subscribe({
+          next: (res) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Deleted!',
+              text: "Election Deleted Successfully",
+              confirmButtonColor: '#28a745',
+              timer: 2000,
+              timerProgressBar: true,
+            }).then(() => {
+              this.getAllAdmins();
+              this.showModal = false ;
+            });
+          },
+          error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: "Election Not Deleted",
+              confirmButtonColor: '#d33',
+              timer: 2000,
+              timerProgressBar: true,
+            });
+          }
+        });
+      }
+    });
   }
 
   // Close the modal

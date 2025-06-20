@@ -35,8 +35,8 @@ export class CandidateTypeComponent implements OnInit {
       bio: ['', [Validators.required, Validators.minLength(3)]],
       electionId: ['', [Validators.required]],
       voteCount: [0, [Validators.required]],
-      image : ['jpg', [Validators.required]],
-      imageDataType : ['', [Validators.required]]
+      imageDataType : ['jpg', [Validators.required]],
+      image : ['', [Validators.required]]
     });
 
     /*
@@ -78,7 +78,7 @@ export class CandidateTypeComponent implements OnInit {
   getAllCandidate() : void {
     this.candidate.getCandidates().subscribe({
       next : (res) => {
-        // console.log(res);
+        console.log(res);
 
         this.admins = res.$values;
       },
@@ -117,16 +117,21 @@ export class CandidateTypeComponent implements OnInit {
     })
   }
 
-  onImageSelected(event: Event) {
+previewImage: string | null = null;
+
+onImageSelected(event: Event) {
   const file = (event.target as HTMLInputElement).files?.[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = () => {
-      this.adminForm.get('imageDataType')?.setValue(reader.result?.toString().split(',')[1]); // Base64 بدون header
+      const base64 = reader.result as string;
+      this.previewImage = base64; // لعرض الصورة
+      this.adminForm.get('image')?.setValue(base64.split(',')[1]); // إزالة header وإرسال base64 فقط
     };
     reader.readAsDataURL(file);
   }
 }
+
 
 
   // Show password
@@ -144,15 +149,23 @@ export class CandidateTypeComponent implements OnInit {
 
   // Add or update an admin
   addOrUpdateAdmin() {
-    // this.showModal = false;
-    // this.adminForm.enable();
-    console.log("admin data : "+ JSON.stringify(this.adminForm.value));
-
-    // if (!this.adminForm.valid) {
-    //   return
-    // }
 
     const adminData = this.adminForm.value;
+console.log("adminData Object:", adminData);
+console.log("voteCount =", adminData.voteCount);
+console.log("imageDataType =", adminData.imageDataType);
+
+    if(this.adminForm.get('imageDataType')?.value === '' || this.adminForm.get('imageDataType')?.value === null) {
+      adminData.imageDataType = 'jpg';
+    }
+
+    if (this.adminForm.get('voteCount')?.value === '' || this.adminForm.get('voteCount')?.value === null) {
+      adminData.voteCount = 0;
+    }
+
+    console.log("admin data : "+ JSON.stringify(this.adminForm.value));
+
+    // const adminData = this.adminForm.value;
     console.log("admin data : "+adminData);
 
     if(!this.mode) {
@@ -163,14 +176,14 @@ export class CandidateTypeComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: res.message.message,
+            text: "Candidate Added Successfully",
             confirmButtonColor: '#28a745',
             confirmButtonText: 'OK',
             timer: 2000,
             timerProgressBar: true,
           }).then(() => {
             this.getAllCandidate();
-            this.showPassword = false ;
+            this.showModal = false ;
             this.mode = false ;
           });
         },
@@ -200,7 +213,7 @@ export class CandidateTypeComponent implements OnInit {
             timerProgressBar: true,
           }).then(() => {
             this.getAllCandidate();
-            this.showPassword = false ;
+            this.showModal = false ;
             this.mode = false ;
           });
         },
@@ -221,30 +234,25 @@ export class CandidateTypeComponent implements OnInit {
 
   // Edit an admin
   editAdmin(category: any) {
-    // this.hideInputpass = true;
+    this.hideInputpass = true;
+    this.mode = true;
+    this.showModal = false;
+    this.selectId = category.id;
 
-    // this.mode = true;
-    // this.showModal = false;
-    // this.adminForm.enable();
-    // const fullname = category.username;
+    this.adminForm.patchValue({
+      name: category.name,
+      party: category.party,
+      bio: category.bio,
+      electionId: category.electionId,
+      voteCount: category.voteCount ?? 0,
+      imageDataType: category.imageDataType || 'jpg',
+      image: category.image || ''
+    });
 
-    // const [firstName, lastName] = fullname.split(' ');
-    // this.adminForm.get('firstName')?.setValue(firstName);
-    // this.adminForm.get('lastName')?.setValue(lastName);
-
-    // this.adminForm.patchValue({
-    //   email: category.email,
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   mobileNumber: category.mobileNumber,
-    //   city : category.city
-    // });
-    // this.selectId = category.id;
-    // // Remove password validator
-    // this.adminForm.get('password')?.clearValidators();
-    // this.adminForm.get('password')?.updateValueAndValidity();
-    // this.showModal = true;
+    this.previewImage = "data:image/jpeg;base64,"+category.image;
+    this.showModal = true;
   }
+
 
   // Show an admin
   show : boolean = false ;
@@ -272,43 +280,44 @@ export class CandidateTypeComponent implements OnInit {
 
   // Delete an admin
   deleteAdmin(id: number) {
-    // Swal.fire({
-    //   title: 'Are you sure want to delete ?',
-    //   text: "",
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#d33',
-    //   cancelButtonColor: '#3085d6',
-    //   confirmButtonText: 'Yes, delete it!',
-    //   cancelButtonText: 'Cancel'
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     this.candidate.deleteCandidate(id).subscribe({
-    //       next: (res) => {
-    //         Swal.fire({
-    //           icon: 'success',
-    //           title: 'Deleted!',
-    //           text: res.message,
-    //           confirmButtonColor: '#28a745',
-    //           timer: 2000,
-    //           timerProgressBar: true,
-    //         }).then(() => {
-    //           this.getAllCandidate(); // تحديث القائمة بعد الحذف
-    //         });
-    //       },
-    //       error: (err) => {
-    //         Swal.fire({
-    //           icon: 'error',
-    //           title: 'Error!',
-    //           text: err.error?.message,
-    //           confirmButtonColor: '#d33',
-    //           timer: 2000,
-    //           timerProgressBar: true,
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
+    Swal.fire({
+      title: 'Are you sure want to delete ?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.candidate.deleteCandidate(id).subscribe({
+          next: (res) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Deleted!',
+              text: res.message,
+              confirmButtonColor: '#28a745',
+              timer: 2000,
+              timerProgressBar: true,
+            }).then(() => {
+              this.getAllCandidate(); // تحديث القائمة بعد الحذف
+              this.showModal = false;
+            });
+          },
+          error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: err.error?.message,
+              confirmButtonColor: '#d33',
+              timer: 2000,
+              timerProgressBar: true,
+            });
+          }
+        });
+      }
+    });
   }
 
   // Close the modal

@@ -65,7 +65,7 @@
           <select formControlName="electionId"
             class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option value="" disabled >Select an Election</option>
-            <option *ngFor="let election of electionId" [value]="election.$id">{{ election.name }}</option>
+            <option *ngFor="let election of admins" [value]="election.electionId">{{ election.name }}</option>
           </select>
           <small *ngIf="adminForm.get('electionId')?.touched && adminForm.get('electionId')?.errors?.['required']"
             class="text-red-500 mt-1">Election selection is required</small>
@@ -73,12 +73,34 @@
 
         <!-- Image Upload (imageDataType) -->
         <div class="flex flex-col">
-          <label class="text-[18px] font-medium text-gray-700 mb-1">Upload Image</label>
-          <input type="file" accept="image/*" (change)="onImageSelected($event)"
-            class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <small *ngIf="adminForm.get('imageDataType')?.touched && adminForm.get('imageDataType')?.errors?.['required']"
-            class="text-red-500 mt-1">Image is required</small>
-        </div>
+  <label class="text-[18px] font-medium text-gray-700 mb-1">Upload Image</label>
+
+  <!-- Input Upload -->
+  <input
+    type="file"
+    accept="image/*"
+    (change)="onImageSelected($event)"
+    class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+
+  <!-- Validation Message -->
+  <small
+    *ngIf="adminForm.get('imageDataType')?.touched && adminForm.get('imageDataType')?.errors?.['required']"
+    class="text-red-500 mt-1"
+  >
+    Image is required
+  </small>
+
+  <!-- Image Preview -->
+  <div *ngIf="previewImage" class="mt-3 flex justify-center">
+    <img
+      [src]="previewImage"
+      alt="Selected Image"
+      class="max-w-[200px] max-h-[200px] object-cover rounded-lg border shadow-md"
+    />
+  </div>
+</div>
+
 
         <!-- Buttons -->
         <div class="flex justify-between mt-4">
