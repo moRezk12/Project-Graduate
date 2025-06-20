@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CandidateService } from 'src/app/Core/services/Candidates/candidate.service';
+import { ElectionService } from 'src/app/Core/services/Elections/election.service';
 import Swal from 'sweetalert2';
 
 
@@ -25,17 +26,31 @@ export class CandidateTypeComponent implements OnInit {
 
   editingIndex: number | null = null;
 
-  constructor(private fb: FormBuilder , private candidate:CandidateService ) {}
+  constructor(private fb: FormBuilder , private candidate:CandidateService , private _Election : ElectionService ) {}
 
   ngOnInit(): void {
     this.adminForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.minLength(3)]],
-      mobileNumber: ['', [Validators.required, Validators.pattern(/^(\+966)?\d{9}$/)]],
-      password: ['', this.mode ? [] : [Validators.required]],
-      city : ['', [Validators.required]]
+      name: ['', [Validators.required, Validators.email]],
+      party: ['', [Validators.required, Validators.minLength(3)]],
+      bio: ['', [Validators.required, Validators.minLength(3)]],
+      electionId: ['', [Validators.required]],
+      voteCount: [0, [Validators.required]],
+      image : ['jpg', [Validators.required]],
+      imageDataType : ['', [Validators.required]]
     });
+
+    /*
+    {
+  "name": "string",
+  "party": "string",
+  "bio": "string",
+  "voteCount": 0,
+  "electionId": 0,
+  "image": "string",
+  "imageDataType": "string"
+}
+    */
+
 
       // Check if the value is a phone number
       this.adminForm.get('mobileNumber')?.valueChanges.subscribe(value => {
@@ -47,7 +62,10 @@ export class CandidateTypeComponent implements OnInit {
     });
 
     // Get All Admins
-    this.getAllAdmins();
+    this.getAllCandidate();
+
+    // Get All Elections
+    this.getAllElection();
 
   }
 
@@ -57,12 +75,12 @@ export class CandidateTypeComponent implements OnInit {
     }
 
   // Get All Admins
-  getAllAdmins() : void {
+  getAllCandidate() : void {
     this.candidate.getCandidates().subscribe({
       next : (res) => {
-        console.log(res);
+        // console.log(res);
 
-        // this.admins = res.data.admins;
+        this.admins = res.$values;
       },
       error : (err) => {
         Swal.fire({
@@ -76,6 +94,40 @@ export class CandidateTypeComponent implements OnInit {
       }
     })
   }
+
+  // Get All Elections
+  electionId : any ;
+  getAllElection() : void {
+    this._Election.getElections().subscribe({
+      next : (res) => {
+        console.log(res);
+        this.electionId = res.$values;
+        // this.admins = res.data.elections;
+      },
+      error : (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: err.error?.message,
+          confirmButtonColor: '#d33',
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
+    })
+  }
+
+  onImageSelected(event: Event) {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.adminForm.get('imageDataType')?.setValue(reader.result?.toString().split(',')[1]); // Base64 بدون header
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
 
   // Show password
   showIcon() {
@@ -94,69 +146,76 @@ export class CandidateTypeComponent implements OnInit {
   addOrUpdateAdmin() {
     // this.showModal = false;
     // this.adminForm.enable();
+    console.log("admin data : "+ JSON.stringify(this.adminForm.value));
+
     // if (!this.adminForm.valid) {
     //   return
     // }
 
-    // const adminData = this.adminForm.value;
-    // if(!this.mode) {
-    //   this.candidate.createCandidate(adminData).subscribe({
-    //     next : (res) => {
+    const adminData = this.adminForm.value;
+    console.log("admin data : "+adminData);
 
-    //       Swal.fire({
-    //         icon: 'success',
-    //         title: 'Success',
-    //         text: res.message.message,
-    //         confirmButtonColor: '#28a745',
-    //         confirmButtonText: 'OK',
-    //         timer: 2000,
-    //         timerProgressBar: true,
-    //       }).then(() => {
-    //         this.getAllAdmins();
-    //         this.showPassword = false ;
-    //         this.mode = false ;
-    //       });
-    //     },
-    //     error : (err) => {
-    //       Swal.fire({
-    //         icon: 'error',
-    //         title: err.error?.message,
-    //         confirmButtonColor: '#d33',
-    //         confirmButtonText: 'Close',
-    //         timer: 2000,
-    //         timerProgressBar: true,
-    //       });
-    //     }
-    //   })
-    // }else {
-    //   this.candidate.updateCandidate(this.selectId , adminData).subscribe({
-    //     next : (res) => {
-    //       Swal.fire({
-    //         icon: 'success',
-    //         title: 'Success',
-    //         text: res.message,
-    //         confirmButtonColor: '#28a745',
-    //         confirmButtonText: 'OK',
-    //         timer: 2000,
-    //         timerProgressBar: true,
-    //       }).then(() => {
-    //         this.getAllAdmins();
-    //         this.showPassword = false ;
-    //         this.mode = false ;
-    //       });
-    //     },
-    //     error : (err) => {
-    //       Swal.fire({
-    //         icon: 'error',
-    //         title: err.error?.message,
-    //         confirmButtonColor: '#d33',
-    //         confirmButtonText: 'Close',
-    //         timer: 2000,
-    //         timerProgressBar: true,
-    //       });
-    //     }
-    //   })
-    // }
+    if(!this.mode) {
+      this.candidate.createCandidate(adminData).subscribe({
+        next : (res) => {
+          console.log(res);
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: res.message.message,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+          }).then(() => {
+            this.getAllCandidate();
+            this.showPassword = false ;
+            this.mode = false ;
+          });
+        },
+        error : (err) => {
+          console.log(err);
+
+          Swal.fire({
+            icon: 'error',
+            title: err.error?.message,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Close',
+            timer: 2000,
+            timerProgressBar: true,
+          });
+        }
+      })
+    }else {
+      this.candidate.updateCandidate(this.selectId , adminData).subscribe({
+        next : (res) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: res.message,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+          }).then(() => {
+            this.getAllCandidate();
+            this.showPassword = false ;
+            this.mode = false ;
+          });
+        },
+        error : (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: err.error?.message,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Close',
+            timer: 2000,
+            timerProgressBar: true,
+          });
+        }
+      })
+    }
 
   }
 
@@ -234,7 +293,7 @@ export class CandidateTypeComponent implements OnInit {
     //           timer: 2000,
     //           timerProgressBar: true,
     //         }).then(() => {
-    //           this.getAllAdmins(); // تحديث القائمة بعد الحذف
+    //           this.getAllCandidate(); // تحديث القائمة بعد الحذف
     //         });
     //       },
     //       error: (err) => {

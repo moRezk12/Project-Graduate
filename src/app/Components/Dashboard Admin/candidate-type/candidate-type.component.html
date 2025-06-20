@@ -1,4 +1,4 @@
-<div class="mt-[15px] w-[95%] mx-auto " >
+<div class="mt-[15px] w-[95%] mx-auto ">
 
   <!-- Add Admin Button -->
   <div class="mb-6 text-right ">
@@ -24,88 +24,66 @@
 
       <!-- Form with styling and validation -->
       <form [formGroup]="adminForm" (ngSubmit)="addOrUpdateAdmin()" class="space-y-4">
-
-        <!-- Name Fields -->
-        <div class="flex justify-between items-center gap-3">
-          <!-- First Name -->
-          <div class="flex flex-col w-full">
-            <label class="text-[18px] font-medium text-gray-700 mb-1">First Name</label>
-            <input type="text" formControlName="firstName" placeholder="Enter Your First Name"
-              class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <small *ngIf="adminForm.get('firstName')?.touched && adminForm.get('firstName')?.errors?.['required']"
-              class="text-red-500 mt-1">First Name is required</small>
-            <small *ngIf="adminForm.get('firstName')?.touched && adminForm.get('firstName')?.errors?.['minlength']"
-              class="text-red-500 mt-1">First Name must be at least {{
-      adminForm.get('firstName')?.errors?.['minlength'].requiredLength }} characters</small>
-          </div>
-
-          <!-- Last Name -->
-          <div class="flex flex-col w-full">
-            <label class="text-[18px] font-medium text-gray-700 mb-1">Last Name</label>
-            <input type="text" formControlName="lastName" placeholder="Enter Your Last Name"
-              class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <small *ngIf="adminForm.get('lastName')?.touched && adminForm.get('lastName')?.errors?.['required']"
-              class="text-red-500 mt-1">Last Name is required</small>
-            <small *ngIf="adminForm.get('lastName')?.touched && adminForm.get('lastName')?.errors?.['minlength']"
-              class="text-red-500 mt-1">Last Name must be at least {{
-      adminForm.get('lastName')?.errors?.['minlength'].requiredLength }} characters</small>
-          </div>
-        </div>
-
-        <!-- Email -->
+        <!-- Name Fields (name) -->
         <div class="flex flex-col">
-          <label class="text-[18px] font-medium text-gray-700 mb-1">Email</label>
-          <input type="email" formControlName="email" placeholder="Email Address"
+          <label class="text-[18px] font-medium text-gray-700 mb-1">Name</label>
+          <input type="text" formControlName="name" placeholder="Enter Name"
             class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <small *ngIf="adminForm.get('email')?.touched && adminForm.get('email')?.errors?.['required']"
+          <small *ngIf="adminForm.get('name')?.touched && adminForm.get('name')?.errors?.['required']"
             class="text-red-500 mt-1">Email is required</small>
-          <small *ngIf="adminForm.get('email')?.touched && adminForm.get('email')?.errors?.['email']"
+          <small *ngIf="adminForm.get('name')?.touched && adminForm.get('name')?.errors?.['name']"
             class="text-red-500 mt-1">Please enter a valid email</small>
         </div>
 
-        <!-- City -->
+        <!-- Party -->
         <div class="flex flex-col">
-          <label class="text-[18px] font-medium text-gray-700 mb-1">City</label>
-          <input type="text" formControlName="city" placeholder="Enter Your City"
+          <label class="text-[18px] font-medium text-gray-700 mb-1">Party</label>
+          <input type="text" formControlName="party" placeholder="Enter Party Name"
             class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <small *ngIf="adminForm.get('city')?.touched && adminForm.get('city')?.errors?.['required']"
-            class="text-red-500 mt-1">City is required</small>
+          <small *ngIf="adminForm.get('party')?.touched && adminForm.get('party')?.errors?.['required']"
+            class="text-red-500 mt-1">Party is required</small>
+          <small *ngIf="adminForm.get('party')?.touched && adminForm.get('party')?.errors?.['minlength']"
+            class="text-red-500 mt-1">Party must be at least {{
+        adminForm.get('party')?.errors?.['minlength'].requiredLength }} characters</small>
         </div>
 
-        <!-- Mobile Number -->
+        <!-- Bio -->
         <div class="flex flex-col">
-          <label class="text-[18px] font-medium text-gray-700 mb-1">Phone</label>
-          <input type="text" formControlName="mobileNumber" placeholder="Enter Mobile Number"
+          <label class="text-[18px] font-medium text-gray-700 mb-1">Bio</label>
+          <input type="text" formControlName="bio" placeholder="Enter bio Name"
             class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <small *ngIf="adminForm.get('mobileNumber')?.touched && adminForm.get('mobileNumber')?.errors?.['required']"
-            class="text-red-500 mt-1">Mobile Number is required</small>
-          <small *ngIf="adminForm.get('mobileNumber')?.touched && adminForm.get('mobileNumber')?.errors?.['pattern']"
-            class="text-red-500 mt-1">Invalid phone number (should start with +966 and have 9 digits)</small>
+          <small *ngIf="adminForm.get('bio')?.touched && adminForm.get('bio')?.errors?.['required']"
+            class="text-red-500 mt-1">Bio is required</small>
+          <small *ngIf="adminForm.get('bio')?.touched && adminForm.get('bio')?.errors?.['minlength']"
+            class="text-red-500 mt-1">Bio must be at least {{
+        adminForm.get('bio')?.errors?.['minlength'].requiredLength }} characters</small>
         </div>
 
-        <!-- Password -->
-        <div class="flex flex-col" *ngIf="!hideInputpass">
-          <label class="text-[18px] font-medium text-gray-700 mb-1">Password</label>
-          <div class="relative">
-            <i class="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer" [ngClass]="{
-        'fa-solid fa-eye-slash': !showPassword,
-        'fa-regular fa-eye': showPassword
-      }" (click)="showIcon()"></i>
-
-            <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
-              placeholder="Enter your password"
-              class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none" />
-          </div>
-          <small *ngIf="adminForm.get('password')?.touched && adminForm.get('password')?.invalid"
-            class="text-red-500 mt-1">Password is required</small>
+        <!-- Election ID -->
+        <div class="flex flex-col">
+          <label class="text-[18px] font-medium text-gray-700 mb-1">Election</label>
+          <select formControlName="electionId"
+            class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="" disabled >Select an Election</option>
+            <option *ngFor="let election of electionId" [value]="election.$id">{{ election.name }}</option>
+          </select>
+          <small *ngIf="adminForm.get('electionId')?.touched && adminForm.get('electionId')?.errors?.['required']"
+            class="text-red-500 mt-1">Election selection is required</small>
         </div>
 
+        <!-- Image Upload (imageDataType) -->
+        <div class="flex flex-col">
+          <label class="text-[18px] font-medium text-gray-700 mb-1">Upload Image</label>
+          <input type="file" accept="image/*" (change)="onImageSelected($event)"
+            class="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <small *ngIf="adminForm.get('imageDataType')?.touched && adminForm.get('imageDataType')?.errors?.['required']"
+            class="text-red-500 mt-1">Image is required</small>
+        </div>
 
         <!-- Buttons -->
         <div class="flex justify-between mt-4">
-          <button type="submit" [disabled]="adminForm.invalid" *ngIf="!show"
-            class="bg-green-600 cursor-pointer disabled:hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-[0.5] text-white w-[40%] px-5 py-2 rounded hover:bg-green-700 transition"
-            (click)="addOrUpdateAdmin()">
+          <button type="submit"
+            class="bg-green-600 cursor-pointer text-white w-[40%] px-5 py-2 rounded hover:bg-green-700 transition">
             {{ mode ? 'Update' : 'Add' }}
           </button>
           <button type="button" (click)="closeModal()"
@@ -115,6 +93,7 @@
         </div>
       </form>
 
+
     </div>
   </div>
 
@@ -123,20 +102,25 @@
     <thead class="bg-gray-100 text-gray-700">
       <tr>
         <th class="py-2 px-4">#</th>
-        <th class="py-2 px-4">userName</th>
-        <th class="py-2 px-4">Email</th>
-        <th class="py-2 px-4">MobileNumber</th>
-        <th class="py-2 px-4">City</th>
+        <th class="py-2 px-4">Name</th>
+        <th class="py-2 px-4">party</th>
+        <th class="py-2 px-4">Code</th>
+        <th class="py-2 px-4">Image</th>
         <th class="py-2 px-4">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let admin of admins ; trackBy : trackBy ;let i = index" class="border-b">
         <td class="py-2 px-4 align-middle ">{{ i + 1 }}</td>
-        <td class="py-2 px-4 align-middle ">{{ admin.username }}</td>
-        <td class="py-2 px-4 align-middle ">{{ admin.email }}</td>
-        <td class="py-2 px-4 align-middle ">{{ admin.mobileNumber }}</td>
-        <td class="py-2 px-4 align-middle ">{{ admin.city }}</td>
+        <td class="py-2 px-4 align-middle ">{{ admin.name }}</td>
+        <td class="py-2 px-4 align-middle ">{{ admin.party }}</td>
+        <td class="py-2 px-4 align-middle ">{{ admin.bio }}</td>
+        <td class="py-2 px-4 align-middle ">
+          {{ admin.city }}
+          <div class="flex items-center rounded-full ">
+            <img [src]="'data:image/jpeg;base64,'+admin.image" alt="Admin Image" class="w-10 h-10 rounded-full">
+          </div>
+        </td>
         <td class="py-3 px-4 text-center align-middle">
           <div class="flex justify-center items-center space-x-2">
             <button (click)="showAdmin(admin)"

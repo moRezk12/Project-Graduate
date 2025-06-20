@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ElectionService } from 'src/app/Core/services/Elections/election.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-elections',
@@ -56,22 +57,23 @@ export class ElectionsComponent implements OnInit {
 
   // Get All Admins
   getAllAdmins() : void {
-    // this.election.getElections().subscribe({
-    //   next : (res) => {
+    this.election.getElections().subscribe({
+      next : (res) => {
+        console.log(res);
 
-    //     this.admins = res.data.admins;
-    //   },
-    //   error : (err) => {
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'Error!',
-    //       text: err.error?.message,
-    //       confirmButtonColor: '#d33',
-    //       timer: 2000,
-    //       timerProgressBar: true,
-    //     });
-    //   }
-    // })
+        this.admins = res.$values;
+      },
+      error : (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: err.error?.message,
+          confirmButtonColor: '#d33',
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
+    })
   }
 
   // Show password
