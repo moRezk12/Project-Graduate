@@ -185,6 +185,7 @@ console.log("imageDataType =", adminData.imageDataType);
             this.getAllCandidate();
             this.showModal = false ;
             this.mode = false ;
+            this.previewImage = null;
           });
         },
         error : (err) => {

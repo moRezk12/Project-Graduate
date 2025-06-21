@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectionService } from 'src/app/Core/services/Elections/election.service';
+import { VotingService } from 'src/app/Core/services/Voting/voting.service';
 
 @Component({
   selector: 'app-type-election',
@@ -8,9 +9,9 @@ import { ElectionService } from 'src/app/Core/services/Elections/election.servic
 })
 export class TypeElectionComponent implements OnInit {
 
-  constructor(private election : ElectionService){}
+  constructor(private election : ElectionService , private _voting : VotingService){}
 
-  data : [] = [];
+  data : any;
   name : any;
 
 
@@ -25,16 +26,18 @@ export class TypeElectionComponent implements OnInit {
     next : (res) => {
       console.log(res);
       this.data = res.$values;
-      console.log(this.data);
-      this.data.forEach((election  : any) => {
-        console.log(election.name);
-        this.name = election.name;
-      });
+      // console.log(this.data);
+      // this.data.forEach((election  : any) => {
+      //   console.log(election.name);
+      //   this.name = election.name;
+      // });
     },
     error : (err) => {
         console.log(err);
       }
     })
+
+
   }
 
 

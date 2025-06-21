@@ -8,8 +8,8 @@
   </div>
 
   <!-- Modal -->
-  <div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div class="bg-white p-8 rounded-2xl shadow-2xl w-[60%] mx-auto relative">
+  <div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center  items-center z-50">
+    <div class="bg-white p-8 rounded-2xl shadow-2xl w-[60%] mx-auto relative  max-h-[90vh] overflow-y-auto hide-scrollbar">
 
       <div class="flex justify-between items-center mb-4 ">
         <h2 class="text-xl font-semibold mb-4">{{ mode ? 'Edit Admin' : 'Add Admin' }}</h2>
@@ -86,8 +86,8 @@
         <td class="py-2 px-4 align-middle ">{{ admin.name }}</td>
         <td class="py-3 px-4 text-center align-middle">
           <div class="flex justify-center items-center space-x-2">
-            <button (click)="showAdmin(admin)"
-              class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Show</button>
+            <!-- <button (click)="showAdmin(admin)"
+              class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Show</button> -->
             <button (click)="editAdmin(admin)"
               class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">Edit</button>
             <button (click)="deleteAdmin(admin.$id)"

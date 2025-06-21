@@ -35,35 +35,13 @@ export class ElectionsComponent implements OnInit {
       electionType: [2, [Validators.required]]
     });
 
-    /*
-    {
-  "id": 0,
-  "name": "string",
-  "startDate": "2025-06-20T18:30:52.458Z",
-  "endDate": "2025-06-20T18:30:52.458Z",
-  "electionType": 0
-}
 
-    */
-
-    // Check if the value is a phone number
-    this.adminForm.get('mobileNumber')?.valueChanges.subscribe(value => {
-    if (this.isPhoneNumber(value)) {
-      if (!value.startsWith('+966')) {
-        this.adminForm.patchValue({ mobileNumber: `+966${value}` }, { emitEvent: false });
-      }
-    }
-  });
 
     // Get All Admins
     this.getAllAdmins();
 
   }
 
-    // Check if the value is a phone number
-    isPhoneNumber(value: string): boolean {
-      return /^[0-9]{10,}$/.test(value);
-    }
 
   // Get All Admins
   getAllAdmins() : void {
@@ -186,27 +164,32 @@ const adminData = this.adminForm.value;
   editAdmin(category: any) {
     // this.hideInputpass = true;
 
-    // this.mode = true;
+    this.mode = true;
     // this.showModal = false;
-    // this.adminForm.enable();
-    // const fullname = category.username;
 
-    // const [firstName, lastName] = fullname.split(' ');
-    // this.adminForm.get('firstName')?.setValue(firstName);
-    // this.adminForm.get('lastName')?.setValue(lastName);
+    const adminData = this.adminForm.value;
 
-    // this.adminForm.patchValue({
-    //   email: category.email,
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   mobileNumber: category.mobileNumber,
-    //   city : category.city
-    // });
-    // this.selectId = category.id;
-    // Remove password validator
-    // this.adminForm.get('password')?.clearValidators();
-    // this.adminForm.get('password')?.updateValueAndValidity();
-    // this.showModal = true;
+    if(this.adminForm.get('electionType')?.value === '' || this.adminForm.get('electionType')?.value === null) {
+      adminData.electionType = 2;
+    }
+
+    if (this.adminForm.get('id')?.value === '' || this.adminForm.get('id')?.value === null) {
+      adminData.id = 0;
+    }
+
+      // تأكد أن التاريخ بصيغة YYYY-MM-DD
+    const formattedStartDate = category.startDate?.split('T')[0];
+    const formattedEndDate = category.endDate?.split('T')[0];
+
+    this.adminForm.patchValue({
+      name: category.name,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate
+    });
+    console.log(this.adminForm.value);
+
+    this.selectId = category.id;
+    this.showModal = true;
   }
 
   // Show an admin
@@ -235,6 +218,8 @@ const adminData = this.adminForm.value;
 
   // Delete an admin
   deleteAdmin(id: number) {
+    console.log(id);
+
     Swal.fire({
       title: 'Are you sure want to delete ?',
       text: "",
