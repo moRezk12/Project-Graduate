@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://egelectionapi.runasp.net'
+  apiUrl: 'http://egelectionapi.runasp.net'
 };
