@@ -57,8 +57,7 @@
         <!-- Buttons -->
         <div class="flex justify-between mt-4">
           <button type="submit"
-            class="bg-green-600 cursor-pointer disabled:hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-[0.5] text-white w-[40%] px-5 py-2 rounded hover:bg-green-700 transition"
-            (click)="addOrUpdateAdmin()">
+            class="bg-green-600 cursor-pointer disabled:hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-[0.5] text-white w-[40%] px-5 py-2 rounded hover:bg-green-700 transition">
             {{ mode ? 'Update' : 'Add' }}
           </button>
           <button type="button" (click)="closeModal()"
@@ -90,7 +89,7 @@
               class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Show</button> -->
             <button (click)="editAdmin(admin)"
               class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">Edit</button>
-            <button (click)="deleteAdmin(admin.$id)"
+            <button (click)="deleteAdmin(admin.id)"
               class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
           </div>
         </td>

@@ -26,7 +26,7 @@ export class TypeElectionComponent implements OnInit {
     next : (res) => {
       console.log(res);
       this.data = res.$values;
-      // console.log(this.data);
+      console.log(this.data);
       // this.data.forEach((election  : any) => {
       //   console.log(election.name);
       //   this.name = election.name;

@@ -79,13 +79,9 @@ export class ElectionsComponent implements OnInit {
 
   // Add or update an admin
   addOrUpdateAdmin() {
-    // this.showModal = false;
-    // this.adminForm.enable();
-    // if (!this.adminForm.valid) {
-    //   return
-    // }
 
-const adminData = this.adminForm.value;
+
+    const adminData = this.adminForm.value;
     if(this.adminForm.get('electionType')?.value === '' || this.adminForm.get('electionType')?.value === null) {
       adminData.electionType = 2;
     }
@@ -129,12 +125,14 @@ const adminData = this.adminForm.value;
         }
       })
     }else {
+      console.log(this.selectId);
+
       this.election.updateElection(this.selectId , adminData).subscribe({
         next : (res) => {
           Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: res.message,
+            text: "Election Updated Successfully",
             confirmButtonColor: '#28a745',
             confirmButtonText: 'OK',
             timer: 2000,
@@ -148,7 +146,7 @@ const adminData = this.adminForm.value;
         error : (err) => {
           Swal.fire({
             icon: 'error',
-            title: err.error?.message,
+            title: "Error!",
             confirmButtonColor: '#d33',
             confirmButtonText: 'Close',
             timer: 2000,
@@ -173,15 +171,16 @@ const adminData = this.adminForm.value;
       adminData.electionType = 2;
     }
 
-    if (this.adminForm.get('id')?.value === '' || this.adminForm.get('id')?.value === null) {
-      adminData.id = 0;
-    }
+    // if (this.adminForm.get('id')?.value === '' || this.adminForm.get('id')?.value === null) {
+    //   adminData.id = category.id;
+    // }
 
       // تأكد أن التاريخ بصيغة YYYY-MM-DD
     const formattedStartDate = category.startDate?.split('T')[0];
     const formattedEndDate = category.endDate?.split('T')[0];
 
     this.adminForm.patchValue({
+      id: category.id,
       name: category.name,
       startDate: formattedStartDate,
       endDate: formattedEndDate
