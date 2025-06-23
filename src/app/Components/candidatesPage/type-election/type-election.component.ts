@@ -15,8 +15,10 @@ export class TypeElectionComponent implements OnInit {
   name : any;
 
 
-  ngOnInit(): void {
+  token : any;
 
+  ngOnInit(): void {
+    this.token = localStorage.getItem('token') || '';
     this.getAllElections();
 
   }

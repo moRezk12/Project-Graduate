@@ -148,8 +148,11 @@
     "candidate_name": "Mohamed Ahmed El Sayed",
     "symbol": "Symbol:",
     "vote_now": "Vote Now"
+  },
+  "notLogin" : {
+    "title" : "You are not logged in yet , please log in",
+    "btn" : "Login"
   }
-
 
 
 

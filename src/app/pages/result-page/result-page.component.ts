@@ -14,8 +14,9 @@ export class ResultPageComponent implements OnInit {
   topCandidates: any[] = [];
   constructor(private _voting : VotingService){}
 
+  token : any ;
   ngOnInit(): void {
-
+    this.token = localStorage.getItem('token') || '';
     this._voting.getVotersResults().subscribe({
       next : (res) => {
         console.log(res);
