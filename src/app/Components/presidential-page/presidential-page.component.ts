@@ -109,7 +109,13 @@ export class PresidentialPageComponent implements OnInit {
           confirmButtonText: 'Close',
           // timer: 2000,
           timerProgressBar: true,
-        });
+        }).then(() => {
+          this.voteNow = false;
+          this.isCameraOpen = false;
+          this.btnOpenCamera = false;
+          this.capturedImage = '';
+          this.closePopup();
+        });;
       }
     });
   }
