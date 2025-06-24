@@ -58,6 +58,40 @@ export class TeamComponent {
           }, 0);
         }
 
+        // data : any ;
+
+        data : any = [
+          {
+            image : 'assets/images/about/team/rezk.jpg',
+            name : 'Mohamed Rezk',
+            desc : 'Frontend Developer'
+          },
+          {
+            image : 'assets/images/about/team/youssef.jpg',
+            name : 'Yousef Saad',
+            desc : 'Backend Developer'
+          },
+          {
+            image : 'assets/images/about/team/amaar.jpg',
+            name : 'Ammar Yasse',
+            desc : 'Fullter Developer'
+          },
+          {
+            image : 'assets/images/about/team/aboel.jpg',
+            name : 'Abd Elfattah Khaled',
+            desc : 'Backend Developer'
+          },
+          {
+            image : 'assets/images/about/team/Khattab.jpg',
+            name : 'Yousef Khattab',
+            desc : 'AI'
+          },
+          {
+            image : 'assets/images/about/team/mohamedelbad.jpg',
+            name : 'Mohamed Al-Labbad',
+            desc : 'UI/UX Designer'
+          },
+        ]
 
 
 }
